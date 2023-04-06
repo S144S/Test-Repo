@@ -1,0 +1,242 @@
+﻿{% extends 'base.html' %}
+
+{% block title %}
+<title>سامانه آموزش تعاملی</title>
+{% endblock %}
+
+{% block content %}
+<!-- ============================ Hero Banner  Start================================== -->
+<div class="image-cover hero_banner">
+    <div class="container">
+        <!-- Type -->
+        <div class="row align-items-center">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="banner-search-2 transparent">
+                    <h1 class="big-header-capt cl_2 mb-2">سعادت </h1>
+                    <h3>سامانه علمی آموزشی دروس تعاملی</h3>
+                    <p>ایده‌پردازی و توسعه توسط تیم دانش‌آموزی دبیرستان دخترانه فرزان</p>
+                    <div class="mt-4">
+                        <div class="banner-search shadow_high">
+                        <div class="search_hero_wrapping">
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="flixio pt-5">
+                    <img class="img-fluid" src="{{ url_for('static', filename='img/6518.png') }}" alt="">
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<!-- ============================ Hero Banner End ================================== -->
+<!-- ============================ Trips Facts Start ================================== -->
+<div class="trips_wrap full colored">
+    <div class="container">
+        <div class="row m-0">
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="trips">
+                        <div class="trips_icons">
+                            <i class="ti-video-camera"></i>
+                        </div>
+                        <div class="trips_detail">
+                            <h4>ساعت‌ها فیلم آموزشی</h4>
+                            <p>به همراه نسخه ناشنوایان</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="trips">
+                        <div class="trips_icons">
+                            <i class="ti-medall"></i>
+                        </div>
+                        <div class="trips_detail">
+                            <h4>ارزیابی و آزمون</h4>
+                            <p>در انتهای هر فصل</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="trips none">
+                        <div class="trips_icons">
+                            <i class="ti-infinite"></i>
+                        </div>
+                        <div class="trips_detail">
+                            <h4>جامع و کامل</h4>
+                            <p>دربردارنده تمام دروس</p>
+                        </div>
+                    </div>
+                </div>
+            
+            
+        </div>
+    </div>
+</div>
+<!-- ============================ Trips Facts Start ================================== -->
+<!-- ========================== Featured Category Section =============================== -->
+<section class="bg-light">
+    <div class="container">
+
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-6 col-sm-12">
+                <div class="sec-heading center">
+                    <p>دروس منتخب</p>
+                    <h2>پایه‌های هفتم، هشتم و نهم </h2>
+                </div>
+            </div>
+        </div>
+    
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="edu_cat_2 cat-1">
+                    <div class="edu_cat_icons">
+                        <i class="fa fa-calculator" aria-hidden="true"></i>
+                    </div>
+                    <div class="edu_cat_data">
+                        <h3 class="title"><a href="{{ url_for('login') }}">ریاضی</a></h3>
+                    </div>
+                </div>							
+            </div>
+            
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="edu_cat_2 cat-2">
+                    <div class="edu_cat_icons">
+                        <i class="fa fa-search" aria-hidden="true"></i>  
+                    </div>
+                    <div class="edu_cat_data">
+                        <h3 class="title"><a href="{{ url_for('login') }}">علوم</a></h3>
+                    </div>
+                </div>							
+            </div>
+            
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="edu_cat_2 cat-3">
+                    <div class="edu_cat_icons">
+                        <i class="fa fa-language" aria-hidden="true"></i>
+                    </div>
+                    <div class="edu_cat_data">
+                        <h3 class="title"><a href="{{ url_for('login') }}">انگلیسی</a></h3>
+                    </div>
+                </div>							
+            </div>
+            
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="edu_cat_2 cat-4">
+                    <div class="edu_cat_icons">
+                        <i class="fa fa-language" aria-hidden="true"></i>
+                    </div>
+                    <div class="edu_cat_data">
+                        <h3 class="title"><a href="{{ url_for('login') }}">عربی</a></h3>
+                    </div>
+                </div>							
+            </div>
+            
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="edu_cat_2 cat-10">
+                    <div class="edu_cat_icons">
+                        <i class="fa fa-book" aria-hidden="true"></i>
+                    </div>
+                    <div class="edu_cat_data">
+                        <h3 class="title"><a href="{{ url_for('login') }}">ادبیات</a></h3>
+                    </div>
+                </div>							
+            </div>
+            
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="edu_cat_2 cat-6">
+                    <div class="edu_cat_icons">
+                        <i class="fa fa-certificate" aria-hidden="true"></i>
+                    </div>
+                    <div class="edu_cat_data">
+                        <h3 class="title"><a href="{{ url_for('login') }}">هدیه‌های آسمانی</a></h3>
+                    </div>
+                </div>							
+            </div>
+            
+        </div>
+    
+</div>
+</section>
+<!-- ========================== Featured Category Section =============================== -->
+<!-- ============================ Featured Courses Start ================================== -->
+<!-- ============================ Featured Courses End ================================== -->
+
+<!-- ========================== About Facts List Section =============================== -->
+<section class="">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="list_facts_wrap">
+                    <div class="sec-heading mb-3 f-24">
+                        <h2>چرا <span class="theme-cl">سعادت </span>بهترین انتخاب برای درک مفاهیم درسی برای شماست؟</h2>
+                    </div>
+                    <div class="list_facts">
+                        <div class="list_facts_icons"><i class="ti-desktop"></i></div>
+                        <div class="list_facts_caption">
+                            <h4>محتوای با کیفیت و درجه یک</h4>
+                            <p>محتوای تولید شده در سعادت با نظارت بهترین معلمان تهیه و در اختیار شما قرار گرفته است.</p>
+                        </div>
+                    </div>
+                    <div class="list_facts">
+                        <div class="list_facts_icons"><i class="ti-heart"></i></div>
+                        <div class="list_facts_caption">
+                            <h4>جایزه های بی نظیر</h4>
+                            <p>بله درست شنیدید! درکنار یادگرفتن درس های همیشگیتان، جایزه نیز دریافت می کنید.</p>
+                        </div>
+                    </div>
+                    <div class="list_facts">
+                        <div class="list_facts_icons"><i class="ti-harddrives"></i></div>
+                        <div class="list_facts_caption">
+                            <h4>پشتیبانی سریع</h4>
+                            <p>هرگونه نظر، انتقاد و پیشنهاد را می توانید در سریعترین زمان با ما درمیان بگذارید و پاسخ ما را دریافت کنید.</p>
+                        </div>
+                    </div>
+                    
+                </div>
+                <a href="{{ url_for('contact_us') }}" class="btn btn-modern">ارتباط با ما<span><i class="ti-arrow-left"></i></span></a>
+            </div>
+            
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="list_facts_wrap_img">
+                    <img src="{{ url_for('static', filename='img/edu_2.png') }}" class="img-fluid" alt="" />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ========================== About Facts List Section =============================== -->
+
+<!-- ============================ Featured Instructor Start ================================== -->
+
+<!-- ============================ Featured Instructor End ================================== -->
+
+<!-- ========================== Articles Section =============================== -->
+<!-- ========================== Articles Section =============================== -->
+
+<!-- ========================== Brand Section =============================== -->
+<!-- ========================== Brand Section =============================== -->
+
+<!-- ============================== Start Newsletter ================================== -->
+<section class="newsletter theme-bg inverse-theme">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7 col-md-8 col-sm-12">
+                <div class="text-center">
+                    <h2>به جامعه هزاران دانش‌آموز بپیوندید!</h2>
+                    <p>به جامعه دانش‌آموزی ما بپیوندید و به ساعت‌ها آموزش در دروس منتخب دسترسی داشته باشید.</p>
+                    <div class="cta-bottom mt-4">
+                        <a href="{{ url_for('register') }}" class="w-50 d-block m-auto">ثبت نام</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ================================= End Newsletter =============================== -->
+{% endblock %}

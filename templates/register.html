@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fa">
+	
+<head>
+		<meta charset="utf-8" />
+		<meta name="author" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<title>سامانه آموزش تعاملی | ثبت نام</title>
+		 
+        <!-- Custom CSS -->
+        <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+		
+		<!-- Custom Color Option -->
+		<link href="{{ url_for('static', filename='css/colors.css') }}" rel="stylesheet">
+		
+    </head>
+	
+    <body class="log-bg rtl">
+	
+        <!-- ============================================================== -->
+        <!-- Preloader - style you can find in spinners.css -->
+        <!-- ============================================================== -->
+        <div id="preloader"><div class="preloader"><span></span><span></span></div></div>
+		
+		
+        <!-- ============================================================== -->
+        <!-- Main wrapper - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <div id="main-wrapper">
+		
+            <!-- ========================== SignUp Elements ============================= -->
+			<section class="log-space">
+				<div class="container">
+					<div class="row justify-content-center">
+						<div class="col-lg-11 col-md-11">
+							<!-- ========================== Slider ============================= -->
+							<div class="row no-gutters position-relative log_rads">
+								<div class="col-lg-6 col-md-5 bg-cover" style="background:#1f2431 url(assets/img/log.png)no-repeat;">
+									<div class="lui_9okt6">
+										<div class="_loh_revu97">
+											<div id="reviews-login" dir="rtl">
+											
+												<!-- Single Reviews -->
+												<div class="_loh_r96">
+													<div class="_bloi_quote"><i class="fa fa-quote-right"></i></div>
+													<div class="_loh_r92">
+														<h4>کاربر پسند</h4>
+													</div>
+													<div class="_loh_r93">
+														<p>تعامل راحت دانش آموزان کلید موفقیت این برنامه است.</p>	
+													</div>	
+													<div class="_loh_foot_r93">
+														<h4>زهرا مرادی</h4>
+														<span>مدیر مدرسه</span>
+													</div>												
+												</div>
+												
+												<!-- Single Reviews -->
+												<div class="_loh_r96">
+													<div class="_bloi_quote"><i class="fa fa-quote-right"></i></div>
+													<div class="_loh_r92">
+														<h4>مدرسین باتجربه</h4>
+													</div>
+													<div class="_loh_r93">
+														<p>زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.</p>	
+													</div>	
+													<div class="_loh_foot_r93">
+														<h4>پارمیدا دادخواه</h4>
+														<span>گرافیست</span>
+													</div>												
+												</div>
+												
+												<!-- Single Reviews -->
+												<div class="_loh_r96">
+													<div class="_bloi_quote"><i class="fa fa-quote-right"></i></div>
+													<div class="_loh_r92">
+														<h4>پشتیبانی قوی</h4>
+													</div>
+													<div class="_loh_r93">
+														<p>زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.</p>	
+													</div>	
+													<div class="_loh_foot_r93">
+														<h4>باربد حسنی</h4>
+														<span>برنامه نویس</span>
+													</div>											
+												</div>
+											
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- ========================== Form ============================= -->
+								<div class="col-lg-6 col-md-7 position-static p-4">
+									<div class="log_wraps">
+										<div class="log__heads">
+											<h4 class="mt-0 logs_title">ایجاد یک <span class="theme-cl">حساب کاربری</span></h4>
+										</div>
+										<form method="POST" action="{{ url_for('register') }}" novalidate>
+											{{ form.hidden_tag() }}
+											<div class="form-group">
+												{{ form.user_name.label }}
+												{{ form.user_name(class="form-control form-control-user", size=20) }}
+												{% for error in form.user_name.errors %}
+													<span class="text-danger">{{ error }}</span>
+												{% endfor %}
+											</div>
+											<div class="form-group row">
+												<div class="col-sm-6 mb-3 mb-sm-0">
+													{{ form.first_name.label }}
+													{{ form.first_name(class="form-control form-control-user", size=20) }}
+													{% for error in form.first_name.errors %}
+														<span class="text-danger">{{ error }}</span>
+													{% endfor %}
+												</div>
+												<div class="col-sm-6">
+													{{ form.last_name.label }}
+													{{ form.last_name(class="form-control form-control-user", size=20) }}
+													{% for error in form.last_name.errors %}
+														<span class="text-danger">{{ error }}</span>
+													{% endfor %}
+												</div>
+											</div>
+											<div class="form-group">
+												{{ form.grade.label }}
+												{{ form.grade(class="form-control form-control-user", size=20) }}
+												{% for error in form.grade.errors %}
+													<span class="text-danger">{{ error }}</span>
+												{% endfor %}
+											</div>
+											<div class="form-group row">
+												<div class="col-sm-6 mb-3 mb-sm-0">
+													{{ form.password.label }}
+													{{ form.password(class="form-control form-control-user", size=20) }}
+													{% for error in form.password.errors %}
+														<span class="text-danger">{{ error }}</span>
+													{% endfor %}
+												</div>
+												<div class="col-sm-6">
+													{{ form.repeat_password.label }}
+													{{ form.repeat_password(class="form-control form-control-user", size=20) }}
+													{% for error in form.repeat_password.errors %}
+														<span class="text-danger">{{ error }}</span>
+													{% endfor %}
+												</div>
+											</div>
+
+											
+											<div class="form-group">
+												{{ form.submit(class="btn btn-primary btn-user btn-block") }}
+											</div>
+										</form>
+										
+										<div class="form-group text-center mb-0 mt-3">
+											آیا حساب کاربری دارید؟ <a href="{{ url_for('login') }}" class="theme-cl">ورود</a>
+										</div>
+										
+									</div>
+								</div>
+							</div>
+						
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- ========================== Login Elements ============================= -->
+			
+
+		</div>
+		<!-- ============================================================== -->
+		<!-- End Wrapper -->
+		<!-- ============================================================== -->
+
+		<!-- ============================================================== -->
+		<!-- All Jquery -->
+		<!-- ============================================================== -->
+		<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/select2.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/slick.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/jquery.counterup.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/counterup.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+		<!-- ============================================================== -->
+		<!-- This page plugins -->
+		<!-- ============================================================== -->
+
+	</body>
+
+</html>
