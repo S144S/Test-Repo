@@ -1,0 +1,262 @@
+﻿{% extends 'base.html' %}
+
+{% block title %}
+<title>انتخاب محتوا</title>
+{% endblock %}
+
+
+{% block content %}
+
+<input class="d-none" type="hidden" id="user-id" value={{ user_id }} />
+<!-- Row -->
+<!-- Changes NAS -->
+<div class="container pt-90 pt-sm-30">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="dashboard_container">
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h1 class="mb-0">
+                        محتوای آموزشی
+                        </h2>
+                    </div>
+                    <div class="card-body row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item">
+                                <a class="nav-link" aria-expanded="true" data-toggle="tab" href="#tab1">{{tabs["1"][0]}}</a>
+                                </li>
+                                <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tab2">{{tabs["2"][0]}}</a>
+                                </li>
+                                <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tab3">{{tabs["3"][0]}}</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#tab4">بخش کلی</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#tab5">آماده آزمون هستی؟</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                
+                    <div class="tab-content">
+                        <div id="tab1" class="tab-pane fade in my-2 show" aria-expanded="true">
+                            <div class="col-lg-8 col-md-8 col-sm-8">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="orig-vid-1" value="1" checked/>
+                                    <label class="form-check-label" for="orig-vid-1">ویدئو حالت معمولی</label>
+                                </div>
+                                
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="deaf-vid-1" value="2" />
+                                    <label class="form-check-label" for="deaf-vid-1">ویدئو حالت ناشنوایان</label>
+                                </div>
+                                
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="text-1" value="3" />
+                                    <label class="form-check-label" for="text-1">متن</label>
+                                </div>
+
+                                <div class="h_iframe-aparat_embed_frame my-3" id="orig-tab1">
+                                    <span class="video-aparat"></span>
+                                    <iframe src="https://www.aparat.com/video/video/embed/videohash/{{tabs["1"][1]}}/vt/frame"  allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                                </div>
+
+                                <div class="h_iframe-aparat_embed_frame my-3 d-none" id="deaf-tab1">
+                                    <span class="video-aparat"></span>
+                                    <iframe src="https://www.aparat.com/video/video/embed/videohash/{{tabs["1"][2]}}/vt/frame"  allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                                </div>
+
+                                <div class="h_iframe-aparat_embed_frame my-3 d-none" id="text-tab1">
+                                    <img class="img-fluid" src="{{ url_for('static', filename='img/TextBook/' + tabs["1"][3]) }}" alt="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="tab2" class="tab-pane fade my-2">
+                            <div class="col-lg-8 col-md-8 col-sm-8">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="orig-vid-2" value="1" checked/>
+                                    <label class="form-check-label" for="orig-vid-2">ویدئو حالت معمولی</label>
+                                </div>
+                                
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="deaf-vid-2" value="2" />
+                                    <label class="form-check-label" for="deaf-vid-2">ویدئو حالت ناشنوایان</label>
+                                </div>
+                                
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="text-2" value="3" />
+                                    <label class="form-check-label" for="text-2">متن</label>
+                                </div>
+
+                                <div class="h_iframe-aparat_embed_frame my-3" id="orig-tab2">
+                                    <span class="video-aparat"></span>
+                                    <iframe src="https://www.aparat.com/video/video/embed/videohash/{{tabs["2"][1]}}/vt/frame"  allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                                </div>
+
+                                <div class="h_iframe-aparat_embed_frame my-3 d-none" id="deaf-tab2">
+                                    <span class="video-aparat"></span>
+                                    <iframe src="https://www.aparat.com/video/video/embed/videohash/{{tabs["2"][2]}}/vt/frame"  allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                                </div>
+
+                                <div class="h_iframe-aparat_embed_frame my-3 d-none" id="text-tab2">
+                                    <img class="img-fluid" src="{{ url_for('static', filename='img/TextBook/' + tabs["2"][3]) }}" alt="">
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <div id="tab3" class="tab-pane fade my-2">
+                            <div class="col-lg-8 col-md-8 col-sm-8">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions3" id="orig-vid-3" value="1" checked/>
+                                    <label class="form-check-label" for="orig-vid-3">ویدئو حالت معمولی</label>
+                                </div>
+                                
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions3" id="deaf-vid-3" value="2" />
+                                    <label class="form-check-label" for="deaf-vid-3">ویدئو حالت ناشنوایان</label>
+                                </div>
+                                
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions3" id="text-3" value="3" />
+                                    <label class="form-check-label" for="text-3">متن</label>
+                                </div>
+
+                                <div class="h_iframe-aparat_embed_frame my-3" id="orig-tab3">
+                                    <span class="video-aparat"></span>
+                                    <iframe src="https://www.aparat.com/video/video/embed/videohash/{{tabs["3"][1]}}/vt/frame"  allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                                </div>
+
+                                <div class="h_iframe-aparat_embed_frame my-3 d-none" id="deaf-tab3">
+                                    <span class="video-aparat"></span>
+                                    <iframe src="https://www.aparat.com/video/video/embed/videohash/{{tabs["3"][2]}}/vt/frame"  allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                                </div>
+
+                                <div class="h_iframe-aparat_embed_frame my-3 d-none" id="text-tab3">
+                                    <img class="img-fluid" src="{{ url_for('static', filename='img/TextBook/' + tabs["3"][3]) }}" alt="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="tab4" class="tab-pane fade my-2">
+                            <div class="col-lg-8 col-md-8 col-sm-8">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions0" id="orig-vid-0" value="1" checked/>
+                                    <label class="form-check-label" for="orig-vid-0">ویدئو حالت معمولی</label>
+                                </div>
+                                
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions0" id="deaf-vid-0" value="2" />
+                                    <label class="form-check-label" for="deaf-vid-0">ویدئو حالت ناشنوایان</label>
+                                </div>
+                                
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions0" id="text-0" value="3" />
+                                    <label class="form-check-label" for="text-0">متن</label>
+                                </div>
+
+                                <div class="h_iframe-aparat_embed_frame my-3" id="orig-tab4">
+                                    <span class="video-aparat"></span>
+                                    <iframe src="https://www.aparat.com/video/video/embed/videohash/{{video}}/vt/frame"  allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                                </div>
+
+                                <div class="h_iframe-aparat_embed_frame my-3 d-none" id="deaf-tab4">
+                                    <span class="video-aparat"></span>
+                                    <iframe src="https://www.aparat.com/video/video/embed/videohash/{{deaf}}/vt/frame"  allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                                </div>
+
+                                <div class="h_iframe-aparat_embed_frame my-3 d-none" id="text-tab4">
+                                    <img class="img-fluid" src="{{ url_for('static', filename='img/TextBook/' + script) }}" alt="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="tab5" class="tab-pane fade my-2">
+                            <div class="col">
+                                <div class="accordion" id="generalac">
+                                    {% for i in range(quiz["num"]) %}
+                                    <div class="card"> 
+                                        <div class="card-header" id="heading{{ i+1 }}">
+                                            <h2 class="mb-0">
+                                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{ i+1 }}" aria-expanded="false" aria-controls="collapse{{ i+1 }}">
+                                                    {{ quiz[(i+1)|string][0] }}
+                                                </button>
+                                            </h2>
+                                        </div>
+                                        <div id="collapse{{ i+1 }}" class="collapse" aria-labelledby="heading{{ i+1 }}" data-parent="#generalac">
+                                            <div class="card-body row">
+                                                <img class="img-fluid col-md-8 col-sm-12 img-question" src="{{ url_for('static', filename='img/Quiz/' +  quiz[(i+1)|string][1]) }}" alt="">
+                                                <input class="d-none" type="hidden" id="resp{{ i+1 }}" value={{ quiz[(i+1)|string][3] }} />
+                                                <div class="col-sm-12 answer-options">
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="inlineRadioOptionsQ{{ i+1 }}" id="qo{{ i+1 }}-1" value="1"/>
+                                                        <label class="form-check-label" for="qo{{ i+1 }}-1">{{quiz[(i+1)|string][2][0]}}</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="inlineRadioOptionsQ{{ i+1 }}" id="qo{{ i+1 }}-2" value="2"/>
+                                                        <label class="form-check-label" for="qo{{ i+1 }}-2">{{quiz[(i+1)|string][2][1]}}</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="inlineRadioOptionsQ{{ i+1 }}" id="qo{{ i+1 }}-3" value="3"/>
+                                                        <label class="form-check-label" for="qo{{ i+1 }}-3">{{quiz[(i+1)|string][2][2]}}</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="inlineRadioOptionsQ{{ i+1 }}" id="qo{{ i+1 }}-4" value="4"/>
+                                                        <label class="form-check-label" for="qo{{ i+1 }}-4">{{quiz[(i+1)|string][2][3]}}</label>
+                                                    </div>
+                                                </div>    
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                <div>
+                                    <button class="btn btn-primary w-50" id="submit-answers">ثبت پاسخ ها</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+            </div>  
+        </div>        
+    </div> 
+</div>
+
+    <!-- Modal -->
+    <div class="modal hide fade modal-position" id="result-modal" tabindex="-1" role="dialog"
+        aria-labelledby="result-modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content modal-header-colored border-0  modal-box-shadow">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark fs-16" id="result-modalLabel">کارنـــامه</h5>
+                </div>
+                <div class="modal-body p-4">
+                    <p class="text-success font-weight-bold" id="modal-summary">عالـــی بودی</p>
+                    <p class="text-info" id="modal-q0">موفق شدی به 5 از 5 سوال جواب درست بدی.</p>
+                    <p class="text-dark" id="modal-q1">سوال 1: کاملا درست</p>
+                    <p class="text-dark" id="modal-q2">سوال 1: کاملا درست</p>
+                    <p class="text-dark" id="modal-q3">سوال 1: کاملا درست</p>
+                    <p class="text-dark" id="modal-q4">سوال 1: کاملا درست</p>
+                    <p class="text-dark" id="modal-q5">سوال 1: کاملا درست</p>
+                </div>
+                <div class="modal-footer border-top-dashed">
+                    <button type="button" class="btn btn-primary m-0" onclick="finishExam()">بازگشت به انتخاب محتوا</button>
+                    <button type="button" class="btn btn-primary m-0 mx-3" onclick="hideModal()">تلاش مجدد</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- End Modal -->
+   
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/course.js') }}"></script>
+<script src="{{ url_for('static', filename='js/resulter.js') }}"></script>
+{% endblock %}
