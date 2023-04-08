@@ -1,51 +1,32 @@
 ﻿{% extends 'base.html' %}
 
 {% block title %}
-<title>سامانه آموزش تعاملی</title>
+<title>جزیره گنج ریاضی</title>
 {% endblock %}
 
 {% block content %}
-<!-- ============================ Hero Banner  Start================================== -->
-<div class="image-cover hero_banner">
+<!-- Start Banner Area -->
+<div class="banner-wrapper-area jarallax" data-jarallax='{"speed": 0.3}'>
     <div class="container">
-        <!-- Type -->
-        <div class="row align-items-center">
-            <div class="col-lg-6 col-md-6 col-sm-12">
-                <div class="banner-search-2 transparent">
-                    <h1 class="big-header-capt cl_2 mb-2">سعادت </h1>
-                    <h3>سامانه علمی آموزشی دروس تعاملی</h3>
-                    <p>روشی نوین برای تقویت دروس مدرسه ویژه دانش آموزان ناشنوا و عادی</p>
-                    <div class="mt-4">
-                        <div class="banner-search shadow_high">
-                        <div class="search_hero_wrapping">
-                        </div>
-                    </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-6 col-md-6 col-sm-12">
-                <div class="flixio pt-5">
-                    <img class="img-fluid" src="{{ url_for('static', filename='img/6518.png') }}" alt="">
-                </div>
-            </div>
-            
+        <div class="banner-wrapper-content">
+            <h1>جزیره گنج</h1>
+            <span class="sub-title">یادگیری مفاهیم درسی و کار تیمی در قالب بازی جمعی</span>
         </div>
     </div>
 </div>
-<!-- ============================ Hero Banner End ================================== -->
-<!-- ============================ Trips Facts Start ================================== -->
+<!-- End Banner Area -->
+
+        <!-- ============================ Trips Facts Start ================================== -->
 <div class="trips_wrap full colored">
     <div class="container">
         <div class="row m-0">
             <div class="col-lg-4 col-md-4 col-sm-12">
                     <div class="trips">
                         <div class="trips_icons">
-                            <i class="ti-video-camera"></i>
+                            <i class='bx bx-brain'></i>
                         </div>
                         <div class="trips_detail">
-                            <h4>ساعت‌ها فیلم آموزشی</h4>
-                            <p>به همراه نسخه ناشنوایان</p>
+                            <h4>یادگیری ماندگار</h4>
                         </div>
                     </div>
                 </div>
@@ -53,11 +34,10 @@
                 <div class="col-lg-4 col-md-4 col-sm-12">
                     <div class="trips">
                         <div class="trips_icons">
-                            <i class="ti-medall"></i>
+                            <i class='bx bx-game'></i>
                         </div>
                         <div class="trips_detail">
-                            <h4>ارزیابی و آزمون</h4>
-                            <p>در انتهای هر فصل</p>
+                            <h4>بازی و سرگرمی</h4>
                         </div>
                     </div>
                 </div>
@@ -65,11 +45,10 @@
                 <div class="col-lg-4 col-md-4 col-sm-12">
                     <div class="trips none">
                         <div class="trips_icons">
-                            <i class="ti-infinite"></i>
+                            <i class='bx bx-group'></i>
                         </div>
                         <div class="trips_detail">
-                            <h4>جامع و کامل</h4>
-                            <p>دربردارنده تمام دروس</p>
+                            <h4>تقویت روحیه تیمی</h4>
                         </div>
                     </div>
                 </div>
@@ -80,61 +59,26 @@
 </div>
 <!-- ============================ Trips Facts Start ================================== -->
 <!-- ========================== Featured Category Section =============================== -->
-<section class="bg-light">
+<section class="pt-70 mb-3 mb-5">
     <div class="container">
 
         <div class="row justify-content-center">
             <div class="col-lg-5 col-md-6 col-sm-12">
-                <div class="sec-heading center">
-                    <p>دروس منتخب</p>
-                    <h2>پایه‌های هفتم، هشتم و نهم </h2>
+                <div class="sec-heading center mb-5">
+                    <p class="text-red">دروس منتخب</p>
+                    <h2 class="text-red">پایه‌های هفتم، هشتم و نهم </h2>
                 </div>
             </div>
         </div>
 
-        <!-- <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-6">
-                <div class="edu_cat_2 cat-1">
-                    <div class="edu_cat_icons">
-                        <i class="fa fa-calculator" aria-hidden="true"></i>
-                    </div>
-                    <div class="edu_cat_data">
-                        <h3 class="title"><a href="{{ url_for('login') }}">ریاضی هفتم</a></h3>
-                    </div>
-                </div>							
-            </div>
-            
-            <div class="col-lg-4 col-md-4 col-sm-6">
-                <div class="edu_cat_2 cat-2">
-                    <div class="edu_cat_icons">
-                        <i class="fa fa-search" aria-hidden="true"></i>  
-                    </div>
-                    <div class="edu_cat_data">
-                        <h3 class="title"><a href="{{ url_for('login') }}">ریاضی هشتم</a></h3>
-                    </div>
-                </div>							
-            </div>
-            
-            <div class="col-lg-4 col-md-4 col-sm-6">
-                <div class="edu_cat_2 cat-3">
-                    <div class="edu_cat_icons">
-                        <i class="fa fa-language" aria-hidden="true"></i>
-                    </div>
-                    <div class="edu_cat_data">
-                        <h3 class="title"><a href="{{ url_for('login') }}">ریاضی نهم</a></h3>
-                    </div>
-                </div>							
-            </div>
-        </div> -->
-    
         <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-6">
                 <div class="edu_cat_2 cat-1">
                     <div class="edu_cat_icons">
-                        <i class="fa fa-calculator" aria-hidden="true"></i>
+                        <i class="bx bx-calculator" aria-hidden="true"></i>
                     </div>
                     <div class="edu_cat_data">
-                        <h3 class="title"><a href="{{ url_for('login') }}">ریاضی</a></h3>
+                        <h3 class="title"><a>ریاضی هفتم</a></h3>
                     </div>
                 </div>							
             </div>
@@ -142,10 +86,10 @@
             <div class="col-lg-4 col-md-4 col-sm-6">
                 <div class="edu_cat_2 cat-2">
                     <div class="edu_cat_icons">
-                        <i class="fa fa-search" aria-hidden="true"></i>  
+                        <i class="bx bx-calculator" aria-hidden="true"></i>  
                     </div>
                     <div class="edu_cat_data">
-                        <h3 class="title"><a href="{{ url_for('login') }}">علوم</a></h3>
+                        <h3 class="title"><a>ریاضی هشتم</a></h3>
                     </div>
                 </div>							
             </div>
@@ -153,10 +97,50 @@
             <div class="col-lg-4 col-md-4 col-sm-6">
                 <div class="edu_cat_2 cat-3">
                     <div class="edu_cat_icons">
-                        <i class="fa fa-language" aria-hidden="true"></i>
+                        <i class="bx bx-calculator" aria-hidden="true"></i>
                     </div>
                     <div class="edu_cat_data">
-                        <h3 class="title"><a href="{{ url_for('login') }}">انگلیسی</a></h3>
+                        <h3 class="title"><a>ریاضی نهم</a></h3>
+                    </div>
+                </div>							
+            </div>
+            
+            
+            
+
+            
+        </div>
+    
+        <!-- <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="edu_cat_2 cat-1">
+                    <div class="edu_cat_icons">
+                        <i class="bx bx-calculator" aria-hidden="true"></i>
+                    </div>
+                    <div class="edu_cat_data">
+                        <h3 class="title"><a>ریاضی</a></h3>
+                    </div>
+                </div>							
+            </div>
+            
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="edu_cat_2 cat-2">
+                    <div class="edu_cat_icons">
+                        <i class="bx bx-search" aria-hidden="true"></i>  
+                    </div>
+                    <div class="edu_cat_data">
+                        <h3 class="title"><a>علوم</a></h3>
+                    </div>
+                </div>							
+            </div>
+            
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="edu_cat_2 cat-3">
+                    <div class="edu_cat_icons">
+                        <i class="bx bx-flag" aria-hidden="true"></i>
+                    </div>
+                    <div class="edu_cat_data">
+                        <h3 class="title"><a>انگلیسی</a></h3>
                     </div>
                 </div>							
             </div>
@@ -164,10 +148,10 @@
             <div class="col-lg-4 col-md-4 col-sm-6">
                 <div class="edu_cat_2 cat-4">
                     <div class="edu_cat_icons">
-                        <i class="fa fa-language" aria-hidden="true"></i>
+                        <i class="bx bx-flag" aria-hidden="true"></i>
                     </div>
                     <div class="edu_cat_data">
-                        <h3 class="title"><a href="{{ url_for('login') }}">عربی</a></h3>
+                        <h3 class="title"><a>عربی</a></h3>
                     </div>
                 </div>							
             </div>
@@ -175,10 +159,10 @@
             <div class="col-lg-4 col-md-4 col-sm-6">
                 <div class="edu_cat_2 cat-10">
                     <div class="edu_cat_icons">
-                        <i class="fa fa-book" aria-hidden="true"></i>
+                        <i class="bx bx-book" aria-hidden="true"></i>
                     </div>
                     <div class="edu_cat_data">
-                        <h3 class="title"><a href="{{ url_for('login') }}">ادبیات</a></h3>
+                        <h3 class="title"><a>ادبیات</a></h3>
                     </div>
                 </div>							
             </div>
@@ -186,10 +170,10 @@
             <div class="col-lg-4 col-md-4 col-sm-6">
                 <div class="edu_cat_2 cat-6">
                     <div class="edu_cat_icons">
-                        <i class="fa fa-certificate" aria-hidden="true"></i>
+                        <i class="bx bx-health" aria-hidden="true"></i>
                     </div>
                     <div class="edu_cat_data">
-                        <h3 class="title"><a href="{{ url_for('login') }}">هدیه‌های آسمانی</a></h3>
+                        <h3 class="title"><a>هدیه‌های آسمانی</a></h3>
                     </div>
                 </div>							
             </div>
@@ -197,47 +181,44 @@
             <div class="col-lg-4 col-md-4 col-sm-6">
                 <div class="edu_cat_2 cat-8">
                     <div class="edu_cat_icons">
-                        <i class="fa fa-fighter-jet" aria-hidden="true"></i>
+                        <i class="bx bx-health" aria-hidden="true"></i>
                     </div>
                     <div class="edu_cat_data">
-                        <h3 class="title"><a href="{{ url_for('login') }}">دفاعی</a></h3>
+                        <h3 class="title"><a>دفاعی</a></h3>
                     </div>
                 </div>							
             </div>
             
-        </div>
+        </div> -->
     
 </div>
 </section>
 <!-- ========================== Featured Category Section =============================== -->
-<!-- ============================ Featured Courses Start ================================== -->
-<!-- ============================ Featured Courses End ================================== -->
-
 <!-- ========================== About Facts List Section =============================== -->
-<section class="">
+<section class=" my-5 pt-100 pb-100">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="list_facts_wrap">
                     <div class="sec-heading mb-3 f-24">
-                        <h2>چرا <span class="theme-cl">سعادت </span>بهترین انتخاب برای درک مفاهیم درسی برای شماست؟</h2>
+                        <h3>چرا <span class="theme-cl">جزیره گنج </span>بهترین انتخاب برای یادگیری مدرسه شماست؟</h3>
                     </div>
                     <div class="list_facts">
-                        <div class="list_facts_icons"><i class="ti-desktop"></i></div>
+                        <div class="list_facts_icons"><i class="bx bx-desktop"></i></div>
                         <div class="list_facts_caption">
-                            <h4>محتوای با کیفیت و درجه یک</h4>
-                            <p>محتوای تولید شده در سعادت با نظارت بهترین معلمان تهیه و در اختیار شما قرار گرفته است.</p>
+                            <h4>چالش‌های جذاب</h4>
+                            <P>سوالات طرح شده در جزیره گنج از سوالات تیمز می‌باشد.</P>
                         </div>
                     </div>
                     <div class="list_facts">
-                        <div class="list_facts_icons"><i class="ti-heart"></i></div>
+                        <div class="list_facts_icons"><i class="bx bx-heart"></i></div>
                         <div class="list_facts_caption">
                             <h4>جایزه های بی نظیر</h4>
                             <p>بله درست شنیدید! درکنار یادگرفتن درس های همیشگیتان، جایزه نیز دریافت می کنید.</p>
                         </div>
                     </div>
                     <div class="list_facts">
-                        <div class="list_facts_icons"><i class="ti-harddrives"></i></div>
+                        <div class="list_facts_icons"><i class="bx bx-phone-call"></i></div>
                         <div class="list_facts_caption">
                             <h4>پشتیبانی سریع</h4>
                             <p>هرگونه نظر، انتقاد و پیشنهاد را می توانید در سریعترین زمان با ما درمیان بگذارید و پاسخ ما را دریافت کنید.</p>
@@ -245,37 +226,25 @@
                     </div>
                     
                 </div>
-                <a href="{{ url_for('contact_us') }}" class="btn btn-modern">ارتباط با ما<span><i class="ti-arrow-left"></i></span></a>
             </div>
             
             <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="list_facts_wrap_img">
-                    <img src="{{ url_for('static', filename='img/edu_2.png') }}" class="img-fluid" alt="" />
+                    <img src="{{ url_for('static', filename='img/isl-def.png') }}" class="img-fluid" alt="" />
                 </div>
             </div>
         </div>
     </div>
 </section>
 <!-- ========================== About Facts List Section =============================== -->
-
-<!-- ============================ Featured Instructor Start ================================== -->
-
-<!-- ============================ Featured Instructor End ================================== -->
-
-<!-- ========================== Articles Section =============================== -->
-<!-- ========================== Articles Section =============================== -->
-
-<!-- ========================== Brand Section =============================== -->
-<!-- ========================== Brand Section =============================== -->
-
-<!-- ============================== Start Newsletter ================================== -->
-<section class="newsletter theme-bg inverse-theme">
+<!--CTA-->
+<section class=" py-5 trips_wrap full colored">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-7 col-md-8 col-sm-12">
                 <div class="text-center">
-                    <h2>به جامعه هزاران دانش‌آموز بپیوندید!</h2>
-                    <p>به جامعه دانش‌آموزی ما بپیوندید و به ساعت‌ها آموزش در دروس منتخب دسترسی داشته باشید.</p>
+                    <h2>به سامانه جذاب آموزشی بپیوندید!</h2>
+                    <p>اگر هنوز مدرسه‌تان در جزیره گنج ثبت نام نکرده‌است، همین حالا ثبت نام کنید و لذت یادگیری و بازی را تجربه کنید.</p>
                     <div class="cta-bottom mt-4">
                         <a href="{{ url_for('register') }}" class="w-50 d-block m-auto">ثبت نام</a>
                     </div>
@@ -284,5 +253,5 @@
         </div>
     </div>
 </section>
-<!-- ================================= End Newsletter =============================== -->
+<!--CTA END-->
 {% endblock %}

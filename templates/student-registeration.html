@@ -1,0 +1,62 @@
+﻿{% extends 'base.html' %}
+
+{% block title %}
+<title>جزیره گنج ریاضی</title>
+{% endblock %}
+
+{% block content %}
+        <!-- Start Banner Area -->
+        <div class="banner-wrapper-area jarallax" data-jarallax='{"speed": 0.3}'>
+            <div class="container">
+                <div class="banner-wrapper-content">
+                    <h1>ثبت نام دانش آموزان</h1>
+                </div>
+            </div>
+        </div>
+        <!-- End Banner Area -->
+
+        <!-- Start Upcoming Tournaments Area -->
+        <section class="upcoming-tournaments-area pb-100">
+            <div class="container">
+                <input class="d-none" type="hidden" id="_token" value={{csrf_token}}>
+                <div class="d-flex align-items-end">
+                    <div class="col-lg-6 col-md-7 position-static p-4">
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <input type="text" class="form-control text-white" id="class-name" placeholder="نام کلاس">
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control text-white" id="stu-grade" placeholder="پایه تحصیلی">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <input type="number" class="form-control text-white" id="stu-nums" placeholder="تعداد دانش آموزان">
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control text-white" id="default-pass" placeholder="رمز پیشفرض برای همه" value="123456789">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-7 position-static p-4">
+                        <button class="form-group btn btn-primary w-100" id="create-form">ساخت فرم</button>
+                    </div>
+                </div>
+                <p class="position-static p-4 text-danger d-none" id="class-alarm">نام کلاس  نمی تواند خالی باشد</p>
+                <p class="position-static p-4 text-danger d-none" id="grage-alarm">پایه تحصیلی نمی تواند خالی باشد</p>
+                <p class="position-static p-4 text-danger d-none" id="num-alarm">برای این بازی حداقل به 6 دانش آموز نیاز است.</p>
+                <p class="position-static p-4 text-danger d-none" id="pass-alarm">رمز پیشفرض برای ورود دانش آموزان به سامانه ضروری است.</p>
+                <div>
+                    <div class="position-static p-4" id="student-form">
+                        <!-- Form created here -->
+                    </div>
+                </div>
+                <p class="position-static p-4 text-danger d-none" id="reg-alarm">پر کردن همه فیلدها برای همه دانش آموزان ضرورای است!</p>
+            </div>
+        </section>
+        <!-- End Upcoming Tournaments Area -->
+{% endblock %}
+
+{% block body_js %}
+<script src="{{ url_for('static', filename='js/students-form.js') }}"></script>
+{% endblock %}
