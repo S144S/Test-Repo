@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>آکیـــما|جزئیات</title>
+{% endblock %}
+
+{% block content %}
+<div class="owl-carousel main-slider">
+    <div class="item-card">
+        <div class="card-content bg-lightnavy">
+            <div class="card-info d-flex my-4">
+                <div class="info-holder">
+                    <h4 class="text-light">{{ user.fname + ' ' + user.lname }} عزیز</h4>
+                </div>
+            </div>
+            <span>در این صفحه می توانید نمودار داده ها را مشاهده کنید</span>
+        </div>
+    </div>
+</div>
+<div class="market-item py-4">
+    <h4 class="main-title py-4"> نمودارها</h4>
+    <div class="row g-3">
+        <div class="chart-col">
+            <div class="crypto-card overflow-hidden">
+                <div class="card-body p-0">
+                    <div class="mb-0 p-3">
+                        <h5>
+                            <span class="cryp-icon my-auto me-2">
+                                <img src="{{ url_for('static', filename='img/icons/thermometer.png') }}" alt="temp image">
+                            </span>دما
+                        </h5>
+                    </div>
+                    <div class="">
+                        <canvas id="temp-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="chart-col">
+            <div class="crypto-card overflow-hidden">
+                <div class="card-body p-0">
+                    <div class="mb-0 p-3">
+                        <h5>
+                            <span class="cryp-icon my-auto me-2">
+                                <img src="{{ url_for('static', filename='img/icons/humidity.png') }}" alt="temp image">
+                            </span>رطوبت
+                        </h5>
+                    </div>
+                    <div class="">
+                        <canvas id="hum-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row g-3 my-3">
+        <div class="chart-col">
+            <div class="crypto-card overflow-hidden">
+                <div class="card-body p-0">
+                    <div class="mb-0 p-3">
+                        <h5>
+                            <span class="cryp-icon my-auto me-2">
+                                <img src="{{ url_for('static', filename='img/icons/pressure.png') }}" alt="temp image">
+                            </span>فشار
+                        </h5>
+                    </div>
+                    <div class="">
+                        <canvas id="press-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="chart-col">
+            <div class="crypto-card overflow-hidden">
+                <div class="card-body p-0">
+                    <div class="mb-0 p-3">
+                        <h5>
+                            <span class="cryp-icon my-auto me-2">
+                                <img src="{{ url_for('static', filename='img/icons/sun.png') }}" alt="temp image">
+                            </span>نور
+                        </h5>
+                    </div>
+                    <div class="">
+                        <canvas id="lux-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="chart-wrapper">
+    <canvas id="chart1"></canvas>
+</div> -->
+
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/chart.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/details-charts.js') }}"></script>
+{% endblock %}

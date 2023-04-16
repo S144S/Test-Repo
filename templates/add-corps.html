@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>آکیـــما|جزئیات</title>
+{% endblock %}
+
+{% block content %}
+<div class="owl-carousel main-slider">
+    <div class="item-card">
+        <div class="card-content bg-lightred">
+            <div class="card-info d-flex my-4">
+                <div class="info-holder">
+                    <h4 class="text-light">{{ user.fname + ' ' + user.lname }} ، مدیر محترم</h4>
+                </div>
+            </div>
+            <span>در این صفحه می توانید محصول جدید به دیتابیس اضافه کنید</span>
+        </div>
+    </div>
+</div>
+
+<div class="card-body">
+    <form method="POST" action="{{ url_for('add_new_corps') }}" novalidate>
+        {{ form.hidden_tag() }}
+        <div class="form-group row">
+            {{ form.name(class="form-control form-control-user") }}
+            {% for error in form.name.errors %}
+                <span class="text-danger mt-2">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div class="form-group row">
+            {{ form.max_temp(class="form-control form-control-user") }}
+            {% for error in form.max_temp.errors %}
+                <span class="text-danger mt-2">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div class="form-group row">
+            {{ form.min_temp(class="form-control form-control-user") }}
+            {% for error in form.min_temp.errors %}
+                <span class="text-danger mt-2">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div class="form-group row">
+            {{ form.max_hum(class="form-control form-control-user") }}
+            {% for error in form.max_hum.errors %}
+                <span class="text-danger mt-2">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div class="form-group row">
+            {{ form.min_hum(class="form-control form-control-user") }}
+            {% for error in form.min_hum.errors %}
+                <span class="text-danger mt-2">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        {{ form.submit(class="btn btn-main btn-lg w-100") }}
+    </form>
+</div>
+
+{% endblock %}
+
+{% block js %}
+{% endblock %}

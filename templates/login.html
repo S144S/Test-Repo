@@ -9,20 +9,20 @@
         <meta name="author" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
-        <title>جزیره گنج | ورود</title>
+        <title>آکیــما | ورورد</title>
 
             <!-- Favicon-->
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.min.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/boxicons.min.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/meanmenu.min.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/flaticon.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/fancybox.min.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/magnific-popup.min.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/rtl.css') }}">
+            <link rel="icon" href="{{ url_for('static', filename='img/favicon.png') }}">
+            <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/touch/homescreen96.png') }}">
+            <link rel="apple-touch-icon" sizes="144x144" href="{{ url_for('static', filename='img/touch/homescreen144.png') }}">
+            <link rel="apple-touch-icon" sizes="168x168" href="{{ url_for('static', filename='img/touch/homescreen168.png') }}">
+            <link rel="apple-touch-icon" sizes="192x192" href="{{ url_for('static', filename='img/touch/homescreen192.png') }}">
+            <!-- Stylesheet-->
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" type="text/css" media="all"/>
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.min.css') }}" type="text/css" media="all"/>
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}" type="text/css" media="all"/>
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/jquery.jConveyorTicker.min.css') }}" type="text/css" media="all"/>
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css" media="all"/>
 
     </head>
     <body>
@@ -46,7 +46,7 @@
                 <div class="login-item">
                     <div class="logo-item py-4">
                         <div class="d-flex justify-content-center text-center">
-                            <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='img/logo.png') }}" alt="logo" class="logo-main"></a>
+                            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="logo" class="logo-main">
                         </div>
                     </div>
                     <div class="login-card-form">
@@ -56,30 +56,30 @@
                         <form method="POST" action="{{ url_for('login') }}" novalidate>
                             {{ form.hidden_tag() }}
                             <div class="form-group row">
-                                {{ form.user_name(class="form-control form-control-user text-white", size=20) }}
-                                {% for error in form.user_name.errors %}
-                                    <span class="text-danger">{{ error }}</span>
+                                {{ form.phone(class="form-control form-control-user") }}
+                                {% for error in form.phone.errors %}
+                                    <span class="text-danger mt-2">{{ error }}</span>
                                 {% endfor %}
                             </div>
                             <div class="form-group row">
-                                {{ form.password(class="form-control form-control-user text-white", size=20) }}
+                                {{ form.password(class="form-control form-control-user") }}
                                 {% for error in form.password.errors %}
-                                    <span class="text-danger">{{ error }}</span>
+                                    <span class="text-danger mt-2">{{ error }}</span>
                                 {% endfor %}
                             </div>
-                            <div class="form-group row d-flex">
-                                {{ form.remember_me.label }}
-                                {{ form.remember_me(class="mr-2") }}
-                                {% for error in form.remember_me.errors %}
-                                    <span class="text-danger">{{ error }}</span>
-                                {% endfor %}
+                            <div class="form-group">
+                                <div class="custom-control custom-checkbox small">
+                                    {{ form.remember_me(class="custom-control-input") }}
+                                    <label class="custom-control-label" for="customCheck">مرا بخاطر بسپار</label>
+                                </div>
                             </div>
-                            <div class="form-group row">
-                                {{ form.submit(class="btn btn-primary btn-user btn-block") }}
-                                
-                            </div>
-                            
+                            {{ form.submit(class="btn btn-main btn-lg w-100") }}
                         </form>
+
+                        <div class="text-left my-4">
+                            <div class="mb-1"><a href="forgot-password.html" class="fw-bold text-primary">رمز عبور را فراموش کرده اید؟</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -89,10 +89,6 @@
         <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/jquery.jConveyorTicker.js') }}"></script>
-        <!-- charts js-->
-        <script src="{{ url_for('static', filename='js/chart.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/chart-custom.js') }}"></script>
         <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/pwa.js') }}"></script>
     </body>
 </html>

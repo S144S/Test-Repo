@@ -9,20 +9,20 @@
         <meta name="author" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
-        <title>جزیره گنج | ثبت نام</title>
+        <title>آکیــما | ثبت نام</title>
 
             <!-- Favicon-->
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.min.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/boxicons.min.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/meanmenu.min.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/flaticon.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/fancybox.min.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/magnific-popup.min.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/rtl.css') }}">
+            <link rel="icon" href="{{ url_for('static', filename='img/favicon.png') }}">
+            <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/touch/homescreen96.png') }}">
+            <link rel="apple-touch-icon" sizes="144x144" href="{{ url_for('static', filename='img/touch/homescreen144.png') }}">
+            <link rel="apple-touch-icon" sizes="168x168" href="{{ url_for('static', filename='img/touch/homescreen168.png') }}">
+            <link rel="apple-touch-icon" sizes="192x192" href="{{ url_for('static', filename='img/touch/homescreen192.png') }}">
+            <!-- Stylesheet-->
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" type="text/css" media="all"/>
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.min.css') }}" type="text/css" media="all"/>
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}" type="text/css" media="all"/>
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/jquery.jConveyorTicker.min.css') }}" type="text/css" media="all"/>
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css" media="all"/>
 
     </head>
     <body>
@@ -41,7 +41,7 @@
             </div>
         </header>
         <!-- Main Section -->
-        <main class="main-content mb-5">
+        <main class="main-content">
             <div class="container">
                 <div class="login-item">
                     <div class="logo-item py-4">
@@ -51,91 +51,39 @@
                     </div>
                     <div class="login-card-form">
                         <h4 class="main-title py-4">
-                        ثبت نام نماینده مرکز آموزشی
+                        ورود
                         </h4>
                         <form method="POST" action="{{ url_for('register') }}" novalidate>
                             {{ form.hidden_tag() }}
                             <div class="form-group row">
-                                <div class="col-12 mb-sm-0">
-                                    {{ form.user_name(class="form-control form-control-user text-white", size=20) }}
-                                    {% for error in form.user_name.errors %}
-                                        <span class="text-danger">{{ error }}</span>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                            <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    {{ form.first_name(class="form-control form-control-user text-white", size=20) }}
+                                    {{ form.first_name(class="form-control form-control-user", size=20) }}
                                     {% for error in form.first_name.errors %}
                                         <span class="text-danger">{{ error }}</span>
                                     {% endfor %}
                                 </div>
                                 <div class="col-sm-6">
-                                    {{ form.last_name(class="form-control form-control-user text-white", size=20) }}
+                                    {{ form.last_name(class="form-control form-control-user", size=20) }}
                                     {% for error in form.last_name.errors %}
                                         <span class="text-danger">{{ error }}</span>
                                     {% endfor %}
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    {{ form.personal_id(class="form-control form-control-user text-white", size=20) }}
-                                    {% for error in form.personal_id.errors %}
-                                        <span class="text-danger">{{ error }}</span>
-                                    {% endfor %}
-                                </div>
-                                <div class="col-sm-6">
-                                    {{ form.phone(class="form-control form-control-user text-white", size=20) }}
-                                    {% for error in form.phone.errors %}
-                                        <span class="text-danger">{{ error }}</span>
-                                    {% endfor %}
-                                </div>
+                            <div class="form-group">
+                                {{ form.phone(class="form-control form-control-user", size=20) }}
+                                {% for error in form.phone.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    {{ form.section(class="form-control text-white", data_toggle="select") }}
-                                    {% for error in form.section.errors %}
-                                        <span class="text-danger">{{ error }}</span>
-                                    {% endfor %}
-                                </div>
-                                <div class="col-sm-6">
-                                    {{ form.grade(class="form-control form-control-user text-white", size=20) }}
-                                    {% for error in form.grade.errors %}
-                                        <span class="text-danger">{{ error }}</span>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-6">
-                                    {{ form.school_name(class="form-control form-control-user text-white", size=20) }}
-                                    {% for error in form.school_name.errors %}
-                                        <span class="text-danger">{{ error }}</span>
-                                    {% endfor %}
-                                </div>
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    {{ form.gender(class="form-control text-white", data_toggle="select") }}
-                                    {% for error in form.gender.errors %}
-                                        <span class="text-danger">{{ error }}</span>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-12 mb-sm-0">
-                                    {{ form.city(class="form-control text-white", data_toggle="select") }}
-                                    {% for error in form.city.errors %}
-                                        <span class="text-danger">{{ error }}</span>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    {{ form.password(class="form-control form-control-user text-white", size=20) }}
+                                    {{ form.password(class="form-control form-control-user", size=20) }}
                                     {% for error in form.password.errors %}
                                         <span class="text-danger">{{ error }}</span>
                                     {% endfor %}
                                 </div>
                                 <div class="col-sm-6">
-                                    {{ form.repeat_password(class="form-control form-control-user text-white", size=20) }}
+                                    {{ form.repeat_password(class="form-control form-control-user", size=20) }}
                                     {% for error in form.repeat_password.errors %}
                                         <span class="text-danger">{{ error }}</span>
                                     {% endfor %}
@@ -152,9 +100,6 @@
         <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/jquery.jConveyorTicker.js') }}"></script>
-        <!-- charts js-->
-        <script src="{{ url_for('static', filename='js/chart.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/chart-custom.js') }}"></script>
         <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     </body>
 </html>
