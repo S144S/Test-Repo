@@ -1,33 +1,18 @@
-from flask import Flask, render_template, url_for, redirect, request, jsonify
+from flask import Flask, render_template, url_for, redirect, request, jsonify, abort
 from flask_login import LoginManager, login_user, current_user, logout_user, login_required
+from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from models import db, Users, Records, Corps, Cities
+from models import db, Users, Contents, Rewards, Questions
 from forms import *
-import secrets
 from flask_bcrypt import Bcrypt
-import pytz
-import datetime
+import json
+from datetime import datetime, timedelta
 import jdatetime
-from sqlalchemy import func
-import math
-from weather import get_weather
 
 # Initializing the app
 app = Flask(__name__, template_folder='templates', static_folder='static')
 app.debug = True
-app.config['SECRET_KEY'] = 'FarzanSchool'
-
-# Initializing upload image
-# UPLOAD_FOLDER = '/path/to/the/uploads'
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
-# app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-# Setting time zone
-utc_tz = pytz.timezone('UTC')
-local_tz = pytz.timezone('Asia/Tehran')
+app.config['SECRET_KEY'] = 'SaadatSite'
 
 # Initializing the login manager
 login_manager = LoginManager()
@@ -44,30 +29,33 @@ db.init_app(app)
 migrate = Migrate(app, db)
 bcrypt = Bcrypt(app)
 
-#####################################################################
+# Register page
 @app.route('/register', methods=('GET', 'POST'))
-@login_required
 def register():
-    if not current_user.is_admin:
+    if current_user.is_authenticated:
         return redirect(url_for('home'))
     form = RegisterForm()
     if form.validate_on_submit():
         is_admin = False
-        password = form.password.data
-        hashed_pass = bcrypt.generate_password_hash(password)
+        user_name = form.user_name.data
         fname = form.first_name.data
         lname = form.last_name.data
-        phone = form.phone.data
-        if('72412' in phone):
+        grade = form.grade.data
+        password = form.password.data
+        hashed_pass = bcrypt.generate_password_hash(password)
+        print(type(user_name), type(fname))
+        if 'sadat_admin' in user_name:
             is_admin = True
-        gen_token =  secrets.token_urlsafe(16)
-        
-        
-        new_user = Users(phone=phone, password = hashed_pass, fname=fname, lname=lname,
-                            is_admin=is_admin, ak_token = gen_token)
-        db.session.add(new_user)
-        db.session.commit()
-        return redirect(url_for('login'))
+
+        user = Users.query.filter_by(user_name=user_name).first()
+        if not user:
+            new_user = Users(user_name=user_name, password=hashed_pass, fname=fname,
+            lname=lname, is_admin=is_admin, grade=grade)
+            db.session.add(new_user)
+            db.session.commit()
+            return redirect(url_for('login'))
+        else:
+            return render_template('register.html', form=form)
     return render_template('register.html', form=form)
 
 # Login page
@@ -79,17 +67,19 @@ def login():
 
     form = LoginForm()
     if form.validate_on_submit():
-        phone = form.phone.data
+        user_name = form.user_name.data
         password = form.password.data
-        user = Users.query.filter_by(phone=phone).first()
+        user = Users.query.filter_by(user_name=user_name).first()
+
         if user:
-            print('success')
             check_pass = bcrypt.check_password_hash(user.password, password)
             if check_pass:
                 login_user(user, remember=form.remember_me.data)
+                user.last_login = datetime.utcnow()
+                db.session.commit()
                 next_page = request.args.get('next')
                 return redirect(next_page) if next_page else redirect(url_for('home'))
-        print(user)
+
     return render_template('login.html', form=form)
 
 # Logout page
@@ -98,298 +88,348 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
 
-# Home page
+# Landing page
 @app.route('/')
+@app.route('/landing')
+def landing():
+    user = ''
+    if current_user.is_authenticated:
+        user = current_user
+        return redirect(url_for('home'))
+    print(user)
+    return render_template('index.html', user=user)
+
+# Home page
 @app.route('/home')
 @login_required
 def home():
-    record = Records.query.filter_by(user_id=current_user.uid).order_by(Records.creation_date.desc()).first()
-    last_update = jdatetime.datetime.fromgregorian(datetime=record.creation_date)
-    last_update_date = last_update.strftime('%Y/%m/%d')
-    local_time = utc_tz.localize(record.creation_date).astimezone(local_tz)
-    last_update_time = local_time.strftime("%H:%M:%S")
+    user = current_user
+    return render_template('home.html', user=user)
+
+# Getting content info
+@app.route('/get-content-info', methods=["POST"])
+@login_required
+def get_content_info():
+    data = request.get_json()
+    if(data['grade'] < 10):
+        return jsonify({"success": True})
+    else:
+        return jsonify({"success": False})
+
+# Course page
+@app.route('/course')
+@login_required
+def course():
+    user=current_user
+    user_id = request.args.get('user_id')
+    grade = request.args.get('grade')
+    lesson = request.args.get('lesson')
+    session = request.args.get('session')
+    content = Contents.query.filter(Contents.grade==grade).filter(Contents.lesson == lesson).filter(Contents.session == session).first()
+
+    if not content:
+        return redirect(url_for('home', sit=1))
+
+    script = content.script
+    video = content.video
+    deaf = content.deaf
+    textbook = content.textbook
+    appliance = content.appliance
+    tabs = json.loads(content.tabs_content)
+    quiz = json.loads(content.quiz)
 
     return render_template(
-        'index.html', 
-        user=current_user, 
-        record=record, 
-        update_date=last_update_date, 
-        update_time=last_update_time
-        )
+        'course.html',
+        user=user,
+        script=script,
+        textbook=textbook,
+        appliance=appliance,
+        video=video,
+        deaf=deaf,
+        tabs=tabs,
+        quiz=quiz
+    )
 
-# Data API
-@app.route('/api/data', methods=["POST"])
-def get_data():
-    auth_header = request.headers.get('Authorization')
-    token = auth_header.split(' ')[1] if auth_header else None
-    if token:
-        user = Users.query.filter_by(ak_token=token).first()
-        data = request.get_json()
-        if data is None:
-            return jsonify({'error': 'No data provided'}), 400
-        if not isinstance(data, dict):
-            return jsonify({'error': 'Data must be a dictionary'}), 400
-        if ('temperature' not in data) or not isinstance(data['temperature'], float):
-            return jsonify({'error': 'temperature is missing from data'}), 400
-        if ('pressure' not in data) or not isinstance(data['pressure'], int):
-            return jsonify({'error': 'pressure is missing from data'}), 400
-        if ('humidity' not in data) or not isinstance(data['humidity'], int):
-            return jsonify({'error': 'humidity is missing from data'}), 400
-        if ('light' not in data) or not isinstance(data['light'], int):
-            return jsonify({'error': 'light is missing from data'}), 400
-        if ('rain' not in data) or not isinstance(data['rain'], int):
-            return jsonify({'error': 'rain is missing from data'}), 400
-        if ('soil' not in data) or not isinstance(data['soil'], int):
-            return jsonify({'error': 'soil is missing from data'}), 400
-        if ('alarm' not in data) or not isinstance(data['alarm'], int):
-            return jsonify({'error': 'alarm is missing from data'}), 400
-        if ('charge' not in data) or not isinstance(data['charge'], int):
-            return jsonify({'error': 'charge is missing from data'}), 400
+# Adding course
+@app.route('/add-course', methods=('GET', 'POST'))
+@login_required
+def add_course():
+    if not current_user.is_admin:
+        abort(404, 'Resource not found')
+    form = AddCourseForm()
+    if form.validate_on_submit():
+        grade = form.grade.data
+        lesson = form.lesson.data
+        session = form.session.data
+        script = form.script.data
+        textbook = form.textbook.data
+        appliance = form.appliance.data
+        video = form.video.data
+        deaf = form.deaf.data
+
+        sec1 = form.sec1.data
+        sec1_list = sec1.split('-')
+        sec2 = form.sec2.data
+        sec2_list = sec2.split('-')
+        sec3 = form.sec3.data
+        sec3_list = sec3.split('-')
+
+        q1 = form.q1.data
+        o1 = form.o1.data.split('-')
+        c1 = int(form.c1.data)
+        q1_list = ['سوال اول', q1, o1, c1]
+
         
-        new_record = Records(
-            user_id=user.uid, 
-            temperature=data['temperature'],
-            pressure=data['pressure'],
-            humidity=data['humidity'],
-            light=data['light'],
-            rain=data['rain'],
-            soil=data['soil'],
-            alarm=data['alarm'],
-            charge=data['charge']
-            )
-        db.session.add(new_record)
-        db.session.commit()
+        q2 = form.q2.data
+        o2 = form.o2.data.split('-')
+        c2 = int(form.c2.data)
+        q2_list = ['سوال دوم', q2, o2, c2]
 
-    return jsonify({'status': 'submitted'})
+        
+        q3 = form.q3.data
+        o3 = form.o3.data.split('-')
+        c3 = int(form.c3.data)
+        q3_list = ['سوال سوم', q3, o3, c3]
 
-# Update data API
-@app.route('/api/update')
-def update_data():
-    record = Records.query.filter_by(user_id=current_user.uid).order_by(Records.creation_date.desc()).first()
-    last_update = jdatetime.datetime.fromgregorian(datetime=record.creation_date)
-    last_update_date = last_update.strftime('%Y/%m/%d')
-    local_time = utc_tz.localize(record.creation_date).astimezone(local_tz)
-    last_update_time = local_time.strftime("%H:%M:%S")
-    return jsonify({
-        'temperature': record.temperature,
-        'pressure': record.pressure,
-        'humidity': record.humidity,
-        'light': record.light,
-        'rain': record.rain,
-        'soil': record.soil,
-        'alarm': record.alarm,
-        'charge': record.charge,
-        'temperature': record.temperature,
-        'last_update_date': last_update_date,
-        'last_update_time': last_update_time
-        })
+        q4 = form.q4.data
+        o4 = form.o4.data.split('-')
+        c4 = int(form.c4.data)
+        q4_list = ['سوال چهارم', q4, o4, c4]
 
-# Details page
-@app.route('/detail')
-def detail():
-    return render_template('details.html', user=current_user)
+        
+        q5 = form.q5.data
+        o5 = form.o5.data.split('-')
+        c5 = int(form.c5.data)
+        q5_list = ['سوال پنجم', q5, o5, c5]
 
-# Update charts data API
-@app.route('/api/chart/update')
-def update_charts():
-    today = datetime.date.today()
-    start_of_day = datetime.datetime.combine(today, datetime.datetime.min.time())
-    end_of_day = datetime.datetime.combine(today, datetime.datetime.max.time())
+        quiz_dict = {
+            'num': 5,
+            1: q1_list,
+            2: q2_list,
+            3: q3_list,
+            4: q4_list,
+            5: q5_list,
 
-    temp_values = db.session.query(func.strftime('%H', Records.creation_date).label('hour'),
-                               func.avg(Records.temperature).label('average_value')).group_by('hour').filter(Records.creation_date >= start_of_day, Records.creation_date <= end_of_day).all()
-    temp_hour_dict = {str(h): int(v) for h, v in temp_values}
-    new_temp_data = [temp_hour_dict.get(str(h).zfill(2), None) for h in range(0, 24)]
-
-    hum_values = db.session.query(func.strftime('%H', Records.creation_date).label('hour'),
-                               func.avg(Records.humidity).label('average_value')).group_by('hour').filter(Records.creation_date >= start_of_day, Records.creation_date <= end_of_day).all()
-    hum_hour_dict = {str(h): int(v) for h, v in hum_values}
-    new_hum_data = [hum_hour_dict.get(str(h).zfill(2), None) for h in range(0, 24)]
-
-    press_values = db.session.query(func.strftime('%H', Records.creation_date).label('hour'),
-                               func.avg(Records.pressure).label('average_value')).group_by('hour').filter(Records.creation_date >= start_of_day, Records.creation_date <= end_of_day).all()
-    press_hour_dict = {str(h): int(v) for h, v in press_values}
-    new_press_data = [press_hour_dict.get(str(h).zfill(2), None) for h in range(0, 24)]
-
-    lux_values = db.session.query(func.strftime('%H', Records.creation_date).label('hour'),
-                                  func.avg(Records.light).label('average_value')).group_by('hour').filter(Records.creation_date >= start_of_day, Records.creation_date <= end_of_day).all()
-    lux_hour_dict = {str(h): int(v) for h, v in lux_values}
-    new_lux_data = [lux_hour_dict.get(str(h).zfill(2), None) for h in range(0, 24)]
-
-    return jsonify({
-        'temp': new_temp_data,
-        'hum': new_hum_data,
-        'press': new_press_data,
-        'lux': new_lux_data
-    })
-
-# Setting page
-@app.route('/setting')
-@login_required
-def setting():
-    corps = Corps.query.all()
-    corps_dict = {}
-    for corp in corps:
-        corps_dict[corp.cid] = corp.name
-
-    cities = Cities.query.all()
-    cities_dict = {}
-    for city in cities:
-        cities_dict[city.cid] = city.name
-
-    return render_template('setting.html', user=current_user, corps=corps_dict, cities=cities_dict)
-
-# Update charts data API
-@app.route('/api/add/corps')
-def add_corps():
-    user_id = current_user.uid
-    corps_name = "انار"
-    max_temp = 40
-    min_temp = 0
-    max_hum = 0
-    min_hum = 0
-
-    # new_corps = Corps(name=corps_name, max_temp=max_temp, min_temp=min_temp)
-    # db.session.add(new_corps)
-    # db.session.commit()
-    return 'done'
-
-# Add new corps
-@app.route('/add-corps', methods=["GET", "POST"])
-@login_required
-def add_new_corps():
-    form = AddCorpsForm()
-    if form.validate_on_submit():
-        name = form.name.data
-        max_temp = form.max_temp.data
-        min_temp = form.min_temp.data
-        max_hum = form.max_hum.data
-        min_hum = form.min_hum.data
-        new_corps = Corps(name=name, max_temp=max_temp, min_temp=min_temp, max_hum=max_hum, min_hum=min_hum)
+        }
+        quiz = json.dumps(quiz_dict)
+        tabs_num = 3
+        tabs_content_dict = {
+            1: sec1_list,
+            2: sec2_list,
+            3: sec3_list
+        }
+        tabs_content = json.dumps(tabs_content_dict)
+        print(quiz)
+        print('-------------------------------------------')
+        new_content = Contents(
+            grade=grade,
+            lesson=lesson,
+            session=session,
+            script=script,
+            textbook = textbook,
+            appliance = appliance,
+            video=video,
+            deaf=deaf,
+            quiz=quiz,
+            tabs_num=tabs_num,
+            tabs_content=tabs_content
+        )
         try:
-            db.session.add(new_corps)
+            db.session.add(new_content)
             db.session.commit()
             return redirect(url_for('home'))
         except:
-            return render_template('add-corps.html', user=current_user, form=form)
+            print('faild')
+            return render_template('add-course.html', user=current_user, form=form)
+    return render_template('add-course.html', user=current_user, form=form)
 
-    return render_template('add-corps.html', user=current_user, form=form)
-
-# Add new city
-@app.route('/add-city', methods=["GET", "POST"])
+# Submit results
+@app.route('/submit-result', methods=["POST"])
 @login_required
-def add_city():
-    user = current_user
-    form = AddCityForm()
-    if form.validate_on_submit():
-        name = form.name.data
-        altitude = form.altitude.data
-
-        new_city = Cities(name=name, altitude=altitude)
-        try:
-            db.session.add(new_city)
-            db.session.commit()
-            return redirect(url_for('home'))
-        except:
-            return render_template('add-city.html', user=user, form=form)
-    return render_template('add-city.html', user=user, form=form)
-
-# Get setting API
-@app.route('/api/setting', methods=["POST"])
-def get_stting():
+def submit_result():
     data = request.get_json()
-    print(data)
+    user = Users.query.get(int(data['id']))
+    activities = json.loads(user.activity)
+    activity = [data['content'], data['res']]
+    if not activities:
+        activities.append(activity)
+    else:
+        if not any(data['content'] in sublist[0] for sublist in activities):
+            activities.append(activity)
 
-    current_user.active_alarm = data['alarm']
-    current_user.corps_id = int(data['corp'])
-    city = Cities.query.get(int(data['city']))
-    current_user.city = city.name
+    user.activity = json.dumps(activities)
     db.session.commit()
+    return jsonify({'success': True})
 
-    return jsonify({'status': True})
-
-# Check for alarm API
-@app.route('/api/is-alarm', methods=["POST"])
-def is_alarm():
-    data = request.get_json()
-    phone = data['phone']
-    user = Users.query.filter_by(phone=phone).first()
-    record = Records.query.filter_by(user_id=user.uid).order_by(Records.creation_date.desc()).first()
-    user_city = user.city
-    city = Cities.query.filter_by(name=user_city).first()
-    user_corp = int(user.corps_id)
-    corp = Corps.query.get(user_corp)
-
-    city_altitude = city.altitude
-    max_temp = corp.max_temp
-    min_temp = corp.min_temp
-    w = get_weather(user.city)
-    alarm = 0
-    
-
-    today_min = int(w['d0_min_temp'])
-    d1_min = int(w['d1_min_temp'])
-    d2_min = int(w['d2_min_temp'])
-    today_max = int(w['d0_max_temp'])
-    temperature = record.temperature
-    min_temp_allowed = corp.min_temp
-    wind = int(w['wind'][:w['wind'].index(' ')])
-    precipitation = int(w['precipitation'][:w['precipitation'].index('%')])
-    pressure = record.pressure
-    T0 = 288.15
-    L = 0.0065
-    P0 = 101325
-    R = 287.05
-    g = 9.80665
-    altitude = int((T0 / L) * (1 - (pressure / P0) ** (R * L / g)))
-    temp_num_d1 = d1_min - min_temp_allowed
-    temp_num_d2 = d2_min - min_temp_allowed
-    alt_num = altitude - city_altitude
-
-    alt_chill = alt_num * 0.0065
-    wind_chill_today = 13.12 + (0.6215 * temperature) - 11.37 * wind**0.16 + 0.3965 * temperature * wind**0.16
-    real_feel_today = wind_chill_today + alt_chill 
-    print(real_feel_today, wind_chill_today, alt_chill)
-
-    if real_feel_today < min_temp_allowed:
-        alarm = 1
-    if temp_num_d1 < min_temp_allowed or temp_num_d2 < min_temp_allowed:
-        alarm = 2
-
-
-
-    return jsonify({'state': alarm})
-
-# Weather report page
-@app.route('/weather')
+# Adding coupon
+@app.route('/add-coupon', methods=('GET', 'POST'))
 @login_required
-def weather():
-    user = current_user
-    w = get_weather(user.city)
-    record = Records.query.filter_by(user_id=user.uid).order_by(Records.creation_date.desc()).first()
+def add_coupon():
+    if not current_user.is_admin:
+        abort(404, 'Resource not found')
+    form = AddCouponForm()
+    if form.validate_on_submit():
+        code = form.code.data
+        description = form.description.data
+        expire_date = form.expire_date.data
 
-    return render_template('weather.html', user=user, weather=w, record=record)
+        new_reward = Rewards(
+            code = code,
+            description=description,
+            expire_date=expire_date
+        )
+        try:
+            db.session.add(new_reward)
+            db.session.commit()
+            return redirect(url_for('home'))
+        except:
+            print('faild')
+    return render_template('add-coupon.html', user=current_user, form=form)
 
-# User profile page
-@app.route('/profile')
+# Profile page
+@app.route('/my-profile')
 @login_required
 def profile():
-    user = current_user
-    form = UpdateProfileForm()
+    user = Users.query.get(current_user.uid)
+    form = UpdateUserForm()
     if form.validate_on_submit():
-        phone = form.phone.data
+        user_name = form.user_name.data
+        fname = form.first_name.data
+        lname = form.last_name.data
         password = form.password.data
         hashed_pass = bcrypt.generate_password_hash(password)
-        user.phone = phone
-        user.password = password
-        db.session.commit()
-        return redirect(url_for('home'))
-    return render_template('profile.html', user=user, form=form)
 
-# User profile page
+        user.user_name = user_name
+        user.fname = fname
+        user.lname = lname
+        user.password = hashed_pass
+        db.session.commit()
+
+        return redirect(url_for('logout'))
+    
+    activities = json.loads(user.activity)
+    total_activity = len(activities)
+    grade_A_cnt = 0
+    grade_B_cnt = 0
+    grade_F_cnt = 0
+    for activity in activities:
+        if(activity[-1] == 2):
+            grade_A_cnt += 1
+        elif(activity[-1] == 1):
+            grade_B_cnt += 1 
+        else:
+            grade_F_cnt += 1 
+
+    last_login = jdatetime.datetime.fromgregorian(datetime=user.last_login).strftime('%Y/%m/%d')
+
+    GET_REWARD = 5
+
+    coupon = grade_A_cnt // GET_REWARD
+    remain_to_coupon = GET_REWARD - (grade_A_cnt % GET_REWARD)
+
+    rewards = []
+    rewards_id = json.loads(user.reward_id)
+
+    if rewards_id:
+        i = 1
+        for rid in rewards_id:
+            reward = Rewards.query.get(rid)
+            expire_date = jdatetime.datetime.fromgregorian(datetime=reward.expire_date).strftime('%Y/%m/%d')
+            rewards.append([i, reward.code, reward.description, expire_date])
+            i += 1
+
+    if coupon >= 1:
+        got_coupon = len(rewards_id)
+        if (coupon % GET_REWARD) == 0:
+            new_coup = coupon // GET_REWARD
+        else:
+            new_coup = coupon % GET_REWARD
+        
+        new_coup = new_coup - got_coupon
+
+        today_date = datetime.utcnow()
+        exp = today_date + timedelta(days=30)
+        
+
+        for j in range(new_coup):
+            rw = Rewards.query.get(j+1)
+            rw.expire_date = exp
+            expire_date = jdatetime.datetime.fromgregorian(datetime=exp).strftime('%Y/%m/%d')
+            rewards.append([j+1, rw.code, rw.description, expire_date])
+            rewards_id.append(j+1)
+        user.reward_id = json.dumps(rewards_id)
+        db.session.commit()
+
+    return render_template(
+        'profile.html',
+        user=current_user,
+        form=form,
+        total_activity=total_activity,
+        grade_A=grade_A_cnt,
+        grade_B=grade_B_cnt,
+        grade_F=grade_F_cnt,
+        last_login=last_login,
+        coupon=coupon,
+        remain_to_coupon=remain_to_coupon,
+        rewards=rewards
+    )
+
+#  Guide page
+@app.route('/guide')
+def guide():
+    return render_template('guide.html', user=current_user)
+
+# About us page
+@app.route('/about-us')
+def about_us():
+    return render_template('about.html', user=current_user)
+
+# Contatct us page
 @app.route('/contact-us')
-def contact():
+def contact_us():
     return render_template('contact.html', user=current_user)
+
+#  Map page
+@app.route('/map')
+def map():
+    return render_template('map.html', user=current_user)
+
+# Ask question page
+@app.route('/ask-question', methods=('GET', 'POST'))
+@login_required
+def ask_question():
+    user = current_user
+    form=AskForm()
+    if form.validate_on_submit():
+        name = form.full_name.data
+        shad = form.shad.data
+        grade = form.grade.data
+        subject = form.subject.data
+        text = form.text.data
+
+        new_question = Questions(
+            user_id=user.uid,
+            name=name,
+            shad=shad,
+            grade=grade,
+            subject=subject,
+            text=text
+        )
+        try:
+            db.session.add(new_question)
+            db.session.commit()
+            return redirect(url_for('home'))
+        except:
+            return render_template('ask-question.html', user=user, form=form)
+
+    return render_template('ask-question.html', user=user, form=form)
+
+# Show questions for admin page
+@app.route('/question-list')
+@login_required
+def question_list():
+    questions = Questions.query.all()
+    return render_template('question-list.html', user=current_user, questions=questions)
 
 # Start the app
 if __name__ == '__main__':

@@ -1,94 +1,156 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="description" content="Nextcoin">
-        <meta name="apple-mobile-web-app-capable" content="yes"/>
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <meta name="keywords" content="HTML,CSS,JavaScript">
-        <meta name="author" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
-        <title>آکیــما | ورورد</title>
-
-            <!-- Favicon-->
-            <link rel="icon" href="{{ url_for('static', filename='img/favicon.png') }}">
-            <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/touch/homescreen96.png') }}">
-            <link rel="apple-touch-icon" sizes="144x144" href="{{ url_for('static', filename='img/touch/homescreen144.png') }}">
-            <link rel="apple-touch-icon" sizes="168x168" href="{{ url_for('static', filename='img/touch/homescreen168.png') }}">
-            <link rel="apple-touch-icon" sizes="192x192" href="{{ url_for('static', filename='img/touch/homescreen192.png') }}">
-            <!-- Stylesheet-->
-            <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" type="text/css" media="all"/>
-            <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.min.css') }}" type="text/css" media="all"/>
-            <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}" type="text/css" media="all"/>
-            <link rel="stylesheet" href="{{ url_for('static', filename='css/jquery.jConveyorTicker.min.css') }}" type="text/css" media="all"/>
-            <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css" media="all"/>
-
+<html lang="fa">
+	
+<head>
+		<meta charset="utf-8" />
+		<meta name="author" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<title>سامانه آموزش تعاملی | ورود</title>
+		 
+        <!-- Custom CSS -->
+        <!-- Custom CSS -->
+        <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+		
+		<!-- Custom Color Option -->
+		<link href="{{ url_for('static', filename='css/colors.css') }}" rel="stylesheet">
+		
     </head>
-    <body>
-        <!-- Page loader -->
-        <div id="loader-page">
-            <div class="loader" id="line">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-        <!-- Header Section -->
-        <header class="header-main">
-            <div class="container">
-            </div>
-        </header>
-        <!-- Main Section -->
-        <main class="main-content">
-            <div class="container">
-                <div class="login-item">
-                    <div class="logo-item py-4">
-                        <div class="d-flex justify-content-center text-center">
-                            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="logo" class="logo-main">
-                        </div>
-                    </div>
-                    <div class="login-card-form">
-                        <h4 class="main-title py-4">
-                        ورود
-                        </h4>
-                        <form method="POST" action="{{ url_for('login') }}" novalidate>
-                            {{ form.hidden_tag() }}
-                            <div class="form-group row">
-                                {{ form.phone(class="form-control form-control-user") }}
-                                {% for error in form.phone.errors %}
-                                    <span class="text-danger mt-2">{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                            <div class="form-group row">
-                                {{ form.password(class="form-control form-control-user") }}
-                                {% for error in form.password.errors %}
-                                    <span class="text-danger mt-2">{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                            <div class="form-group">
-                                <div class="custom-control custom-checkbox small">
-                                    {{ form.remember_me(class="custom-control-input") }}
-                                    <label class="custom-control-label" for="customCheck">مرا بخاطر بسپار</label>
-                                </div>
-                            </div>
-                            {{ form.submit(class="btn btn-main btn-lg w-100") }}
-                        </form>
+	
+    <body class="log-bg rtl">
+	
+        <!-- ============================================================== -->
+        <!-- Preloader - style you can find in spinners.css -->
+        <!-- ============================================================== -->
+        <div id="preloader"><div class="preloader"><span></span><span></span></div></div>
+		
+		
+        <!-- ============================================================== -->
+        <!-- Main wrapper - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <div id="main-wrapper">
+		
+            <!-- ========================== SignUp Elements ============================= -->
+			<section class="log-space">
+				<div class="container">
+					<div class="row justify-content-center">
+						<div class="col-lg-11 col-md-11">
+						
+							<div class="row no-gutters position-relative log_rads">
+								<!-- ========================== Slider ============================= -->
+								<div class="col-lg-6 col-md-5 bg-cover" style="background:#1f2431 url(assets/img/log.png)no-repeat;">
+									<div class="lui_9okt6">
+										<div class="_loh_revu97">
+											<div id="reviews-login" dir="rtl">
+												<!-- Single Reviews -->
+												<div class="_loh_r96">
+													<div class="_bloi_quote"><i class="fa fa-quote-right"></i></div>
+													<div class="_loh_r92">
+														<h4>بهبود فرآیند آموزشی ویژه ی ناشنوایان</h4>
+													</div>
+													<div class="_loh_r93 pt-5">
+														<p>استفاده از توانمندی دانش آموزان برای رشد خویش و همسالان و توجه به تفاوت های فردی و افزایش انگیزه در جهت بهبود فرآیند یاددهی یادگیری دانش آموزان بویژه ناشنوایان.</p>	
+													</div>	
+												</div>
+												
+												<!-- Single Reviews -->
+												<div class="_loh_r96">
+													<div class="_bloi_quote"><i class="fa fa-quote-right"></i></div>
+													<div class="_loh_r92">
+														<h4>سامانه آموزشی تعاملی برخط دو</h4>
+													</div>
+													<div class="_loh_r93 pt-5">
+														<p>ایجاد فرصت های یادگیری تعاملی برخط برای تدریس هدفمند (تدریس دانش آموزی، آموزش هدایت شده، همراه با روش نمایشی و لب‌خوانی معلم ناشنوا) برای دانش آموزان ناشنوا به منظور ارتقا کیفیت فعالیت های آموزشی. </p>	
+													</div>	
+												</div>
+												
+												<!-- Single Reviews -->
+												<div class="_loh_r96">
+													<div class="_bloi_quote"><i class="fa fa-quote-right"></i></div>
+													<div class="_loh_r92">
+														<h4>آهنگ مناسب ناشنوایان</h4>
+													</div>
+													<div class="_loh_r93 pt-5">
+														<p>استفاده از رسانه و فناوری اطلاعات و آموزش غیرحضوری و مجازی و توجه به عدالت آموزشی و طراحی آموزشی بر اساس برنامه درسی ملی با ارائه طرح درس منسجم و پیشرفت فرآیند آموزش و یادگیری با آهنگ مناسب ناشنوایان.</p>	
+													</div>											
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- ========================== Form ============================= -->
+								<div class="col-lg-6 col-md-7 position-static p-4">
+									<div class="log_wraps">
+										<a href="index.html" class="log-logo_head"><img src="assets/img/logo.png" class="img-fluid" width="80" alt="" /></a>
+										<div class="log__heads">
+											<h4 class="mt-0 logs_title">ورود به <span class="theme-cl">حساب کاربری</span> یا <a href="{{ url_for('landing') }}" class="theme-cl">بازگشت به خانه</a></h4>
+										</div>
+										
+										<form method="POST" action="{{ url_for('login') }}" novalidate>
+											{{ form.hidden_tag() }}
+											<div class="form-group row">
+												{{ form.user_name.label }}
+												{{ form.user_name(class="form-control form-control-user", size=20) }}
+												{% for error in form.user_name.errors %}
+													<span class="text-danger">{{ error }}</span>
+												{% endfor %}
+											</div>
+											<div class="form-group row">
+												{{ form.password.label }}
+												{{ form.password(class="form-control form-control-user", size=20) }}
+												{% for error in form.password.errors %}
+													<span class="text-danger">{{ error }}</span>
+												{% endfor %}
+											</div>
+											<div class="form-group row">
+												{{ form.remember_me.label }}
+												{{ form.remember_me(class="") }}
+												{% for error in form.remember_me.errors %}
+													<span class="text-danger">{{ error }}</span>
+												{% endfor %}
+											</div>
+											
+											<div class="form-group">
+												{{ form.submit(class="btn btn-primary btn-user btn-block") }}
+											</div>
+										</form>
+										
+										
+										<div class="form-group text-center mb-0 mt-3">
+											آیا هنوز ثبت نام نکرده اید؟ <a href="{{ url_for('register') }}" class="theme-cl">ثبت نام</a>
+										</div>
+										
+									</div>
+								</div>
+							</div>
+						
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- ========================== Login Elements ============================= -->
+			
 
-                        <div class="text-left my-4">
-                            <div class="mb-1"><a href="forgot-password.html" class="fw-bold text-primary">رمز عبور را فراموش کرده اید؟</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-        <!-- JQuery library file -->
-        <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/jquery.jConveyorTicker.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-    </body>
+		</div>
+		<!-- ============================================================== -->
+		<!-- End Wrapper -->
+		<!-- ============================================================== -->
+
+		<!-- ============================================================== -->
+		<!-- All Jquery -->
+		<!-- ============================================================== -->
+		<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/select2.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/slick.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/jquery.counterup.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/counterup.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+		<!-- ============================================================== -->
+		<!-- This page plugins -->
+		<!-- ============================================================== -->
+
+	</body>
+
 </html>

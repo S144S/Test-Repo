@@ -1,0 +1,101 @@
+.pt-90{
+    padding-top: 90px;
+}
+
+i.fa::before{
+    font-size: xx-large;
+}
+
+i.fa.fa-calculator::before {
+
+    color: #00adb8;
+}
+.edu_cat_2.cat-2 .fa-search::before {
+    color: #f7b320;
+}
+
+.edu_cat_2.cat-3 .fa-language::before {
+    color: #f10750;
+}
+i.fa.fa-book::before {
+    color: #202124;
+}
+
+i.fa.fa-certificate {
+    color: #b963fd;
+}
+
+.edu_cat_2.cat-4 .fa-language::before {
+    color: #9ade45;
+}
+
+.cta-bottom>a {
+    background: white;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.edu_cat_data .title>a {
+    font-size: 20px;
+}
+
+.edu_cat_2{
+    justify-content: space-evenly !important;
+}
+
+.selector {
+    width: 100%;
+    text-align: right;
+    padding: 9px 25px;
+    line-height: 1.25;
+}
+
+.card-body> * {
+    margin-bottom: 10px;
+}
+
+.h_iframe-aparat_embed_frame {
+    position:relative;
+}
+.h_iframe-aparat_embed_frame .ratio {
+    display:block;
+    width:100%;
+    height:auto;
+}
+.h_iframe-aparat_embed_frame iframe {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+}
+
+.video-aparat {
+    display: block;
+    padding-top: 57%;
+}
+
+.img-question{
+    display: block;
+    max-height: 70vh;
+}
+
+.min-height-container{
+    min-height: 70vh;
+}
+@media screen and (max-width: 576px){
+    .pt-sm-30{
+        padding-top: 30px;
+    }
+}
+@media screen and (min-width: 768px) {
+    .form-check{
+        display: block !important;
+    }
+    .answer-options{
+        display: flex;
+        /* NAS */
+        /* flex-direction: column;
+        justify-content: space-around; */
+    }
+}

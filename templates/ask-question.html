@@ -1,0 +1,107 @@
+﻿{% extends 'base.html' %}
+
+{% block title %}
+<title>ثبت سوال</title>
+{% endblock %}
+
+
+{% block content %}
+<!-- ============================ Page Title Start================================== -->
+<section class="page-title">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="breadcrumbs-wrap">
+                    <h1 class="breadcrumb-title">سوالات خود را بپرسید</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ============================ Page Title End ================================== -->	
+
+<!-- ============================ Agency List Start ================================== -->
+<section class="bg-light">
+
+<div class="container">
+
+    <!-- row Start -->
+    <div class="row justify-content-center">
+    
+        <div class="col-lg-8 col-md-7">
+            <div class="prc_wrap">
+                
+                <div class="prc_wrap_header">
+                    <h4 class="property_block_title">ثبت سوال</h4>
+                </div>
+                
+                <div class="prc_wrap-body">
+                    <form method="POST" action="{{ url_for('ask_question') }}" novalidate>
+                        {{ form.hidden_tag() }}
+                        <div class="row">
+                            <div class="col-lg-4 col-md-12">
+                                <div class="form-group">
+                                    {{ form.full_name.label }}
+                                    {{ form.full_name(class="form-control simple", size=20) }}
+                                    {% for error in form.full_name.errors %}
+                                        <span class="text-danger">{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-12">
+                                <div class="form-group">
+                                    {{ form.shad.label }}
+                                    {{ form.shad(class="form-control simple", size=20) }}
+                                    {% for error in form.shad.errors %}
+                                        <span class="text-danger">{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-12">
+                                <div class="form-group">
+                                    {{ form.grade.label }}
+                                    {{ form.grade(class="form-control simple", size=20) }}
+                                    {% for error in form.grade.errors %}
+                                        <span class="text-danger">{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            {{ form.subject.label }}
+                            {{ form.subject(class="form-control simple", size=20) }}
+                            {% for error in form.subject.errors %}
+                                <span class="text-danger">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        
+                        <div class="form-group">
+                            {{ form.text.label }}
+                            {{ form.text(class="form-control simple", size=20) }}
+                            {% for error in form.text.errors %}
+                                <span class="text-danger">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        
+                        <div class="form-group">
+                            {{ form.submit(class="btn btn-theme") }}
+                        </div>
+                    </form>
+                </div>
+                
+            </div>
+                            
+        </div>
+    </div>
+    <!-- /row -->		
+    
+</div>
+        
+</section>
+<!-- ============================ Agency List End ================================== -->
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/content-info.js') }}"></script>
+{% endblock %}

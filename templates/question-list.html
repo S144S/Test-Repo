@@ -1,0 +1,43 @@
+﻿{% extends 'base.html' %}
+
+{% block title %}
+<title>مشاهده پیام ها</title>
+{% endblock %}
+
+
+{% block content %}
+<!-- Row -->
+<div class="container pt-90 pt-sm-30">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="dashboard_container">
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h1 class="breadcrumb-title">سوالات پرسیده شده کاربران</h1>
+                    </div>
+                    <div class="card-body row">
+                        {% for question in questions %}
+                        <div class="card col-12 mb-5 py-3">
+							<div class="ed_detail_wrap">
+								<div class="ed_header_caption">
+									<h2 class="ed_title">{{ question.subject }}</h2>
+									<ul>
+                                        <li><i class="ti-user"></i>نام: {{ question.name }}</li>
+										<li><i class="ti-calendar"></i>آیدی شاد: {{ question.shad }}</li>
+									</ul>
+								</div>
+								<div class="ed_header_short">
+									<p>{{ question.text }}</p>
+								</div>
+							</div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>    
+<!-- /Row -->
+{% endblock %}
+

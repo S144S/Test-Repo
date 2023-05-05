@@ -1,212 +1,310 @@
-{% extends 'base.html' %}
+﻿{% extends 'base.html' %}
 
 {% block title %}
-<title>آکیــما</title>
+<title>سامانه آموزش تعاملی</title>
 {% endblock %}
 
 {% block content %}
-<div class="owl-carousel main-slider">
-    <div class="item-card">
-        <div class="card-content bg-lightblue">
-            <div class="card-info d-flex my-4">
-                <div class="info-holder">
-                    <span>خوش آمدید</span>
-                    <h4 class="text-light">{{ user.fname + ' ' + user.lname }}</h4>
+<!-- ============================ Hero Banner  Start================================== -->
+<div class="image-cover hero_banner">
+    <div class="container">
+        <!-- Type -->
+        <div class="row align-items-center">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="banner-search-2 transparent">
+                    <h1 class="big-header-capt cl_2 mb-2">سعادت </h1>
+                    <h3 class="pt-3">سامانه علمی آموزشی دروس تعاملی</h3>
+                    <p>روشی نوین برای افزایش میزان موفقیت و عملکرد دانش آموزان بویژه ناشنوایان</p>
+                    <div class="mt-4">
+                        <div class="banner-search shadow_high">
+                        <div class="search_hero_wrapping">
+                        </div>
+                    </div>
+                    </div>
                 </div>
             </div>
-            <span>میزان شارژ سیم کارت</span>
-            <h2 class="text-light d-flex align-items-end" id="data-charge">
-                {{ record.charge }}
-                <span class="mx-2">تومان</span>
-            </h2>
+            
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="flixio pt-5">
+                    <img class="img-fluid" src="{{ url_for('static', filename='img/6518.png') }}" alt="">
+                </div>
+            </div>
+            
         </div>
     </div>
 </div>
+<!-- ============================ Hero Banner End ================================== -->
+<!-- ============================ Trips Facts Start ================================== -->
+<div class="trips_wrap full colored">
+    <div class="container">
+        <div class="row m-0">
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="trips">
+                        <div class="trips_icons">
+                            <i class="ti-video-camera"></i>
+                        </div>
+                        <div class="trips_detail">
+                            <h4>ساعت‌ها فیلم آموزشی</h4>
+                            <p>به همراه نسخه ویژه ناشنوایان</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="trips">
+                        <div class="trips_icons">
+                            <i class="ti-medall"></i>
+                        </div>
+                        <div class="trips_detail">
+                            <h4>ارزیابی و آزمون</h4>
+                            <p>در انتهای هر فصل</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="trips none">
+                        <div class="trips_icons">
+                            <i class="ti-infinite"></i>
+                        </div>
+                        <div class="trips_detail">
+                            <h4>جامع و کامل</h4>
+                            <p>دربردارنده دروس منتخب ریاضی</p>
+                        </div>
+                    </div>
+                </div>
+            
+            
+        </div>
+    </div>
+</div>
+<!-- ============================ Trips Facts Start ================================== -->
+<!-- ========================== Featured Category Section =============================== -->
+<section class="bg-light">
+    <div class="container">
 
-<div class="market-item py-4">
-    <h4 class="main-title py-4">خلاصه وضعیت</h4>
-    <div class="row g-3">
-        <div class="col-6 col-md-4 col-lg-3">
-            <div class="crypto-card overflow-hidden">
-                <div class="card-body p-0">
-                    <div class="mb-0 p-3">
-                        <h5>
-                            <span class="cryp-icon my-auto me-2">
-                                <img src="{{ url_for('static', filename='img/icons/thermometer.png') }}" alt="coin image">
-                            </span>
-                            دما
-                        </h5>
-                        <div class="d-flex justify-content-between mt-2">
-                            <p class="d-flex font-weight-normal" id="data-temperature">{{ record.temperature }} درجه</p>
-                        </div>
-                    </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-6 col-sm-12">
+                <div class="sec-heading center">
+                    <p>دروس منتخب</p>
+                    <h2 class="pt-3">تمامی پایه‌های تحصیلی</h2>
                 </div>
             </div>
         </div>
-        <div class="col-6 col-md-4 col-lg-3">
-            <div class="crypto-card overflow-hidden">
-                <div class="card-body p-0">
-                    <div class="mb-0 p-3">
-                        <h5>
-                            <span class="cryp-icon my-auto me-2">
-                                <img src="{{ url_for('static', filename='img/icons/humidity.png') }}" alt="coin image">
-                            </span>
-                            رطوبت
-                        </h5>
-                        <div class="d-flex justify-content-between mt-2">
-                            <p class="d-flex font-weight-normal" id="data-humidity">{{ record.humidity }}%</p>
+
+<!--         <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="edu_cat_2 cat-1">
+                    <div class="edu_cat_icons">
+                        <i class="fa fa-calculator" aria-hidden="true"></i>
+                    </div>
+                    <div class="edu_cat_data">
+                        <h3 class="title"><a href="{{ url_for('login') }}">ریاضی هفتم</a></h3>
+                    </div>
+                </div>							
+            </div>
+            
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="edu_cat_2 cat-2">
+                    <div class="edu_cat_icons">
+                        <i class="fa fa-calculator" aria-hidden="true"></i>  
+                    </div>
+                    <div class="edu_cat_data">
+                        <h3 class="title"><a href="{{ url_for('login') }}">ریاضی هشتم</a></h3>
+                    </div>
+                </div>							
+            </div>
+            
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="edu_cat_2 cat-3">
+                    <div class="edu_cat_icons">
+                        <i class="fa fa-calculator" aria-hidden="true"></i>
+                    </div>
+                    <div class="edu_cat_data">
+                        <h3 class="title"><a href="{{ url_for('login') }}">ریاضی نهم</a></h3>
+                    </div>
+                </div>							
+            </div>
+        </div> -->
+    
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="edu_cat_2 cat-1">
+                    <div class="edu_cat_icons">
+                        <i class="fa fa-calculator" aria-hidden="true"></i>
+                    </div>
+                    <div class="edu_cat_data">
+                        <h3 class="title"><a href="{{ url_for('login') }}">ریاضی</a></h3>
+                    </div>
+                </div>							
+            </div>
+            
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="edu_cat_2 cat-2">
+                    <div class="edu_cat_icons">
+                        <i class="fa fa-search" aria-hidden="true"></i>  
+                    </div>
+                    <div class="edu_cat_data">
+                        <h3 class="title"><a href="{{ url_for('login') }}">علوم</a></h3>
+                    </div>
+                </div>							
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="edu_cat_2 cat-10">
+                    <div class="edu_cat_icons">
+                        <i class="fa fa-book" aria-hidden="true"></i>
+                    </div>
+                    <div class="edu_cat_data">
+                        <h3 class="title"><a href="{{ url_for('login') }}">ادبیات</a></h3>
+                    </div>
+                </div>							
+            </div>
+            
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="edu_cat_2 cat-3">
+                    <div class="edu_cat_icons">
+                        <i class="fa fa-language" aria-hidden="true"></i>
+                    </div>
+                    <div class="edu_cat_data">
+                        <h3 class="title"><a href="{{ url_for('login') }}">انگلیسی</a></h3>
+                    </div>
+                </div>							
+            </div>
+            
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="edu_cat_2 cat-4">
+                    <div class="edu_cat_icons">
+                        <i class="fa fa-language" aria-hidden="true"></i>
+                    </div>
+                    <div class="edu_cat_data">
+                        <h3 class="title"><a href="{{ url_for('login') }}">عربی</a></h3>
+                    </div>
+                </div>							
+            </div>
+            
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="edu_cat_2 cat-3">
+                    <div class="edu_cat_icons">
+                        <i class="fa fa-language" aria-hidden="true"></i>
+                    </div>
+                    <div class="edu_cat_data">
+                        <h3 class="title"><a href="{{ url_for('login') }}">قرآن</a></h3>
+                    </div>
+                </div>							
+            </div>
+           
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="edu_cat_2 cat-10">
+                    <div class="edu_cat_icons">
+                        <i class="fa fa-book" aria-hidden="true"></i>
+                    </div>
+                    <div class="edu_cat_data">
+                        <h3 class="title"><a href="{{ url_for('login') }}">مطالعات</a></h3>
+                    </div>
+                </div>							
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="edu_cat_2 cat-6">
+                    <div class="edu_cat_icons">
+                        <i class="fa fa-certificate" aria-hidden="true"></i>
+                    </div>
+                    <div class="edu_cat_data">
+                        <h3 class="title"><a href="{{ url_for('login') }}">هدیه‌</a></h3>
+                    </div>
+                </div>							
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="edu_cat_2 cat-8">
+                    <div class="edu_cat_icons">
+                        <i class="fa fa-fighter-jet" aria-hidden="true"></i>
+                    </div>
+                    <div class="edu_cat_data">
+                        <h3 class="title"><a href="{{ url_for('login') }}">دفاعی</a></h3>
+                    </div>
+                </div>							
+            </div>
+            
+        </div>
+    
+</div>
+</section>
+<!-- ========================== Featured Category Section =============================== -->
+<!-- ============================ Featured Courses Start ================================== -->
+<!-- ============================ Featured Courses End ================================== -->
+
+<!-- ========================== About Facts List Section =============================== -->
+<section class="">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="list_facts_wrap">
+                    <div class="sec-heading mb-3 f-24">
+                        <h2>چرا <span class="theme-cl">سعادت </span>بهترین انتخاب برای درک مفاهیم درسی برای شماست؟</h2>
+                    </div>
+                    <div class="list_facts">
+                        <div class="list_facts_icons"><i class="ti-desktop"></i></div>
+                        <div class="list_facts_caption">
+                            <h4 class="pt-3">محتوای با کیفیت و درجه یک</h4>
+                            <p>محتوای تولید شده در سعادت با نظارت بهترین معلمان تهیه و در اختیار شما قرار گرفته است.</p>
                         </div>
                     </div>
+                    <div class="list_facts">
+                        <div class="list_facts_icons"><i class="ti-heart"></i></div>
+                        <div class="list_facts_caption">
+                            <h4>جایزه های بی نظیر</h4>
+                            <p>بله درست شنیدید! درکنار یاد گرفتن درس های همیشگیتان، جایزه نیز دریافت می کنید.</p>
+                        </div>
+                    </div>
+                    <div class="list_facts">
+                        <div class="list_facts_icons"><i class="ti-harddrives"></i></div>
+                        <div class="list_facts_caption">
+                            <h4>پشتیبانی سریع</h4>
+                            <p>هرگونه نظر، انتقاد و پیشنهاد را می توانید در سریع ترین زمان با ما در میان بگذارید و پاسخ ما را دریافت کنید.</p>
+                        </div>
+                    </div>
+                    
+                </div>
+                <a href="{{ url_for('contact_us') }}" class="btn btn-modern">ارتباط با ما<span><i class="ti-arrow-left"></i></span></a>
+            </div>
+            
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="list_facts_wrap_img">
+                    <img src="{{ url_for('static', filename='img/edu_2.png') }}" class="img-fluid" alt="" />
                 </div>
             </div>
         </div>
-        <div class="col-6 col-md-4 col-lg-3">
-            <div class="crypto-card overflow-hidden">
-                <div class="card-body p-0">
-                    <div class="mb-0 p-3">
-                        <h5>
-                            <span class="cryp-icon my-auto me-2">
-                                <img src="{{ url_for('static', filename='img/icons/pressure.png') }}" alt="coin image">
-                            </span>
-                            فشار هوا
-                        </h5>
-                        <div class="d-flex justify-content-between mt-2">
-                            <p class="d-flex font-weight-normal" id="data-pressure">{{ record.pressure }} پاسکال</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-6 col-md-4 col-lg-3">
-            <div class="crypto-card overflow-hidden">
-                <div class="card-body p-0">
-                    <div class="mb-0 p-3">
-                        <h5>
-                            <span class="cryp-icon my-auto me-2">
-                                <img src="{{ url_for('static', filename='img/icons/sun.png') }}" alt="coin image">
-                            </span>
-                            نور
-                        </h5>
-                        <div class="d-flex justify-content-between mt-2">
-                            <p class="d-flex font-weight-normal" id="data-light">{{ record.light }} لوکس</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-6 col-md-4 col-lg-3">
-            <div class="crypto-card overflow-hidden">
-                <div class="card-body p-0">
-                    <div class="mb-0 p-3">
-                        <h5>
-                            <span class="cryp-icon my-auto me-2">
-                                <img src="{{ url_for('static', filename='img/icons/rain.png') }}" alt="coin image">
-                            </span>
-                            وضعیت باران
-                        </h5>
-                        <div class="d-flex justify-content-between mt-2">
-                            {% if record.rain < 1 %}
-                                <p class="d-flex font-weight-normal" id="data-rain">خشک</p>
-                            {% elif record.rain < 2 %}
-                                <p class="d-flex font-weight-normal" id="data-rain">شبنم</p>
-                            {% elif record.rain < 3 %}
-                                <p class="d-flex font-weight-normal" id="data-rain">آرام</p>
-                            {% else %}
-                                <p class="d-flex font-weight-normal" id="data-rain">شدید</p>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-6 col-md-4 col-lg-3">
-            <div class="crypto-card overflow-hidden">
-                <div class="card-body p-0">
-                    <div class="mb-0 p-3">
-                        <h5>
-                            <span class="cryp-icon my-auto me-2">
-                                <img src="{{ url_for('static', filename='img/icons/soil.png') }}" alt="coin image">
-                            </span>
-                            رطوبت خاک
-                        </h5>
-                        <div class="d-flex justify-content-between mt-2">
-                            {% if record.rain < 1 %}
-                                <p class="d-flex font-weight-normal" id="data-soil">خشک</p>
-                            {% elif record.rain < 2 %}
-                                <p class="d-flex font-weight-normal" id="data-soil">کمی مرطوب</p>
-                            {% elif record.rain < 3 %}
-                                <p class="d-flex font-weight-normal" id="data-soil">نسبتا مرطوب</p>
-                            {% else %}
-                                <p class="d-flex font-weight-normal" id="data-soil">کاملا مرطوب</p>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-6 col-md-4 col-lg-3">
-            <div class="crypto-card overflow-hidden">
-                <div class="card-body p-0">
-                    <div class="mb-0 p-3">
-                        <h6>
-                            <span class="cryp-icon my-auto me-2">
-                                <img src="{{ url_for('static', filename='img/icons/alarm.png') }}" alt="coin image">
-                            </span>
-                            وضعیت هشدار هواشناسی
-                        </h6>
-                        <div class="d-flex justify-content-between mt-2">
-                            {% if not record.alram %}
-                            <p class="d-flex font-weight-normal" id="data-light">سفید</p>
-                            {% else %}
-                            <p class="d-flex font-weight-normal" id="data-light">قرمز</p>
-                            {% endif %}
-                        </div>
+    </div>
+</section>
+<!-- ========================== About Facts List Section =============================== -->
+
+<!-- ============================ Featured Instructor Start ================================== -->
+
+<!-- ============================ Featured Instructor End ================================== -->
+
+<!-- ========================== Articles Section =============================== -->
+<!-- ========================== Articles Section =============================== -->
+
+<!-- ========================== Brand Section =============================== -->
+<!-- ========================== Brand Section =============================== -->
+
+<!-- ============================== Start Newsletter ================================== -->
+<section class="newsletter theme-bg inverse-theme">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7 col-md-8 col-sm-12">
+                <div class="text-center">
+                    <h2>به جامعه هزاران دانش‌آموز سعادت بپیوندید!</h2>
+                    <p>به جامعه دانش‌آموزی ما بپیوندید و به ساعت‌ها آموزش در دروس منتخب دسترسی داشته باشید.</p>
+                    <div class="cta-bottom mt-4">
+                        <a href="{{ url_for('register') }}" class="w-50 d-block m-auto">ثبت نام</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-<div class="value-market-item">
-    <div class="row">
-        <div class="col-12 overflow-hidden">
-            <div class="value-market-ticker">
-                <ul>
-                    <li>
-                        <span>تاریخ آخرین بروزرسانی:<span class="text-warning ps-1" id="data-date">{{ update_date }}</span> </span>
-                    </li>
-                    <li>
-                        <span>ساعت آخرین بروزرسانی: <span class="text-warning ps-1" id="data-time">{{ update_time }}</span> </span>
-                    </li>
-                    <li>
-                        <span>وضعیت کلی سیستم:<span class="text-warning ps-1">مطلوب</span> </span>
-                    </li>
-                    <li>
-                        <span></span>
-                    </li>
-                    <li>
-                        <span></span>
-                    </li>
-                    <li>
-                        <span></span>
-                    </li>
-                    <li>
-                        <span></span>
-                    </li>
-                    <li>
-                        <span></span>
-                    </li>
-                    <li>
-                        <span></span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-{% endblock %}
-
-{% block js %}
-<script src="{{ url_for('static', filename='js/updater.js') }}"></script>
+</section>
+<!-- ================================= End Newsletter =============================== -->
 {% endblock %}
