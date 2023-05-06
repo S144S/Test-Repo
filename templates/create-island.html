@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="Nextcoin">
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="keywords" content="HTML,CSS,JavaScript">
+        <meta name="author" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+        <title>ساخت جزیره</title>
+
+            <!-- Favicon-->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/boxicons.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/meanmenu.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/flaticon.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/fancybox.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/magnific-popup.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/rtl.css') }}">
+
+    </head>
+    <body>
+        <!-- Page loader -->
+        <div id="loader-page">
+            <div class="loader" id="line">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <!-- Header Section -->
+        <header class="header-main">
+            <div class="container">
+            </div>
+        </header>
+        <!-- Main Section -->
+        <main class="main-content">
+            <div class="container">
+                <div class="login-item">
+                    <div class="logo-item py-4">
+                        <div class="d-flex justify-content-center text-center">
+                            {% if user %}
+                                {% if user.is_teacher %}
+                                <a href="{{ url_for('teacher') }}">
+                                    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="logo" class="logo-main">
+                                </a>
+                                {% else %}
+                                <a href="{{ url_for('group') }}">
+                                    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="logo" class="logo-main">
+                                </a>
+                                {% endif %}
+                            {% else %}
+                            <a href="{{ url_for('home') }}">
+                                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="logo" class="logo-main">
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="login-card-form">
+                        <h4 class="main-title py-4">
+                        ساخت جزیره
+                        </h4>
+                        <form method="POST" action="{{ url_for('create_island') }}" novalidate>
+                            {{ form.hidden_tag() }}
+                            <div class="form-group row">
+                                {{ form.name(class="form-control form-control-user text-white", size=20) }}
+                                {% for error in form.name.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="form-group row">
+                                {{ form.grade(class="form-control form-control-user text-white", size=20) }}
+                                {% for error in form.grade.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="form-group row">
+                                {{ form.lesson(class="form-control text-white", data_toggle="select") }}
+                                {% for error in form.lesson.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="form-group row">
+                                {{ form.treasure(class="form-control form-control-user text-white", size=20) }}
+                                {% for error in form.treasure.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="form-group row">
+                                {{ form.avatar(class="form-control form-control-user text-white", size=20) }}
+                                {% for error in form.avatar.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="form-group row">
+                                {{ form.map(class="form-control form-control-user text-white", size=20) }}
+                                {% for error in form.map.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="form-group row">
+                                {{ form.start_date(class="form-control form-control-user text-white", size=20) }}
+                                {% for error in form.start_date.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="form-group row">
+                                {{ form.end_date(class="form-control form-control-user text-white", size=20) }}
+                                {% for error in form.end_date.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <hr>
+                            <div class="form-group row">
+                                {{ form.p1(class="form-control form-control-user text-white", size=20) }}
+                                {% for error in form.p1.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="form-group row">
+                                {{ form.a1(class="form-control form-control-user text-white", size=20) }}
+                                {% for error in form.a1.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <hr>
+                            <div class="form-group row">
+                                {{ form.p2(class="form-control form-control-user text-white", size=20) }}
+                                {% for error in form.p2.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="form-group row">
+                                {{ form.a2(class="form-control form-control-user text-white", size=20) }}
+                                {% for error in form.a2.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <hr>
+                            <div class="form-group row">
+                                {{ form.p3(class="form-control form-control-user text-white", size=20) }}
+                                {% for error in form.p3.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="form-group row">
+                                {{ form.a3(class="form-control form-control-user text-white", size=20) }}
+                                {% for error in form.a3.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <hr>
+                            <div class="form-group row">
+                                {{ form.p4(class="form-control form-control-user text-white", size=20) }}
+                                {% for error in form.p4.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="form-group row">
+                                {{ form.a4(class="form-control form-control-user text-white", size=20) }}
+                                {% for error in form.a4.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <hr>
+                            <div class="form-group row">
+                                {{ form.p5(class="form-control form-control-user text-white", size=20) }}
+                                {% for error in form.p5.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="form-group row">
+                                {{ form.a5(class="form-control form-control-user text-white", size=20) }}
+                                {% for error in form.a5.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <hr>
+                            <div class="form-group row">
+                                {{ form.p6(class="form-control form-control-user text-white", size=20) }}
+                                {% for error in form.p6.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="form-group row">
+                                {{ form.a6(class="form-control form-control-user text-white", size=20) }}
+                                {% for error in form.a6.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <hr>
+                            <div class="form-group row">
+                                {{ form.scientist(class="form-control form-control-user text-white", size=20) }}
+                                {% for error in form.scientist.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="form-group row">
+                                {{ form.b1(class="form-control form-control-user text-white", size=20) }}
+                                {% for error in form.b1.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="form-group row">
+                                {{ form.b2(class="form-control form-control-user text-white", size=20) }}
+                                {% for error in form.b2.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="form-group row">
+                                {{ form.b3(class="form-control form-control-user text-white", size=20) }}
+                                {% for error in form.b3.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="form-group row">
+                                {{ form.b4(class="form-control form-control-user text-white", size=20) }}
+                                {% for error in form.b4.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="form-group row">
+                                {{ form.b5(class="form-control form-control-user text-white", size=20) }}
+                                {% for error in form.b5.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="form-group row">
+                                {{ form.b6(class="form-control form-control-user text-white", size=20) }}
+                                {% for error in form.b6.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="form-group row">
+                                {{ form.submit(class="btn btn-primary btn-user btn-block") }}
+                            </div>
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- JQuery library file -->
+        <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/jquery.jConveyorTicker.js') }}"></script>
+        <!-- charts js-->
+        <script src="{{ url_for('static', filename='js/chart.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/chart-custom.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/pwa.js') }}"></script>
+    </body>
+</html>

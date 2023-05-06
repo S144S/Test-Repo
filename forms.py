@@ -1,14 +1,25 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, DateField, TextAreaField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, SelectField, TextAreaField, DateField
 from wtforms.validators import InputRequired, Length, EqualTo
+from flask_wtf.file import FileField, FileAllowed
+
+cities = ['مشهد', 'تهران', 'اصفهان', 'یزد', 'اهواز', 'تبریز', 'کرج', 'بیرجند', 'بجنورد', 'گرگان', 'زاهدان', 'کرمان']
+lessons = ['مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند', 'فروردین', 'اردیبهشت', 'خرداد']
+textbook_models = ['ساده', 'متوسط', 'پیشرفته']
 
 class RegisterForm(FlaskForm):
-    user_name = StringField('نام کاربری', validators=[InputRequired(message="نام کاربری نمی تواند خالی باشد")], render_kw={"placeholder": "نام کاربری"})
+    user_name = StringField('نام کاربری', validators=[InputRequired(message="نام کاربری نمی تواند خالی باشد")], render_kw={"placeholder": "نام کاربری برای ورود به سایت"})
     first_name = StringField('نام', validators=[InputRequired(message="نام خود را وارد کنید")], render_kw={"placeholder": "نام"})
     last_name = StringField('نام خانوادگی', validators=[InputRequired(message="نام خانوادگی خود را وارد کنید")], render_kw={"placeholder": "نام خانوادگی"})
+    personal_id = StringField('کد ملی', validators=[InputRequired(message="کد ملی نمی تواند خالی باشد"), Length(min=10, max=10, message="کد ملی نامعتبر")], render_kw={"placeholder": "کد ملی"})
+    phone = StringField('تلفن همراه', validators=[InputRequired(message="تلفن همراه نمی تواند خالی باشد"), Length(min=11, max=11, message="تلفن همراه نامعتبر")], render_kw={"placeholder": "تلفن همراه"})
     password = PasswordField('رمز عبور', validators=[InputRequired(message="یک رمز عبور انتخاب کنید"), Length(min=8, max=20, message="رمز باید حداقل 8 کاراکتر داشته اشد")], render_kw={"placeholder": "رمز عبور"})
     repeat_password = PasswordField('تکرار رمز عبور', validators=[InputRequired(message="رمز عبور خود را تکرار کنید"), EqualTo('password', message="تکرار رمز و رمز با یکدیگر یکسان نیستند!")], render_kw={"placeholder": "تکرار رمز عبور"})
-    grade = IntegerField('پایه تحصیلی', validators=[InputRequired(message="پایه تحصیلی خود را وارد کنید")], render_kw={"placeholder": "پایه تحصیلی"})
+    grade = IntegerField('پایه تحصیلی', validators=[InputRequired(message="پایه تحصیلی خود را وارد کنید")], render_kw={"placeholder": "پایه تحصیلی هدف"})
+    section = SelectField('مقطع تحصیلی', choices=[('1', 'متوسطه اول'), ('2', 'متوسطه دوم'), ('0', 'ابتدایی')])
+    school_name = StringField('نام مرکز آموزشی', validators=[InputRequired(message="نام مرکز نمی تواند خالی باشد")], render_kw={"placeholder": "نام مرکز آموزشی"})
+    city = SelectField('شهر', choices=[(c, c) for c in cities])
+    gender = SelectField('جنسیت', choices=[('1', 'دخترانه'), ('2', 'پسرانه')])
     submit = SubmitField('ثبت نام')
 
 
@@ -19,53 +30,63 @@ class LoginForm(FlaskForm):
     submit = SubmitField('ورود')
 
 
-class AddCourseForm(FlaskForm):
-    grade = IntegerField('پایه تحصیلی', validators=[InputRequired(message="پایه تحصیلی را وارد کنید")], render_kw={"placeholder": "پایه تحصیلی"})
-    lesson = IntegerField('درس', validators=[InputRequired(message="درس را وارد کنید")], render_kw={"placeholder": "درس"})
-    session = IntegerField('فصل', validators=[InputRequired(message="فصل را وارد کنید")], render_kw={"placeholder": "فصل"})
-    script = StringField('نام فایل عکس متن', validators=[InputRequired(message="لطفا نام فایل را وارد کنید")], render_kw={"placeholder": "نام فایل(مثلا test.pdf)"})
-    textbook = StringField('نام فایل پی دی اف درسنامه', validators=[InputRequired(message="لطفا نام فایل را وارد کنید")], render_kw={"placeholder": "نام فایل(مثلا test.pdf)"})
-    appliance = StringField('نام فایل عکس کاربرد', validators=[InputRequired(message="لطفا نام فایل را وارد کنید")], render_kw={"placeholder": "نام فایل(مثلا test.jpg)"})
-    video = StringField('کد فیلم کلی اصلی درس', validators=[InputRequired(message="لطفا کد فیلم را وارد کنید")], render_kw={"placeholder": "کد فیلم(مثلا yQbWO)"})
-    deaf = StringField('کد فیلم کلی ناشنوایان درس', validators=[InputRequired(message="لطفا کد فیلم ناشنوایان را وارد کنید")], render_kw={"placeholder": "کد فیلم(مثلا yQbWO)"})
-    sec1 = StringField('محتوای بخش اول(الگو: عنوان بخش-کد فیلم-کد فیلم ناشنوا-اسم عکس متن)', validators=[InputRequired(message="لطفا محتوای بخش اول را وارد کنید")], render_kw={"placeholder": "'بخش اول'-'کد فیلم'-'کد فیلم ناشنوا'-'اسم کامل عکس'"})
-    sec2 = StringField('محتوای بخش دوم(الگو: عنوان بخش-کد فیلم-کد فیلم ناشنوا-اسم عکس متن)', validators=[InputRequired(message="لطفا محتوای بخش دوم را وارد کنید")], render_kw={"placeholder": "'بخش دوم'-'کد فیلم'-'کد فیلم ناشنوا'-'اسم کامل عکس'"})
-    sec3 = StringField('محتوای بخش سوم(الگو: عنوان بخش-کد فیلم-کد فیلم ناشنوا-اسم عکس متن)', validators=[InputRequired(message="لطفا محتوای بخش سوم را وارد کنید")], render_kw={"placeholder": "'بخش سوم'-'کد فیلم'-'کد فیلم ناشنوا'-'اسم کامل عکس'"})
-    q1 = StringField('اسم تصویر سوال اول', validators=[InputRequired(message="لطفا سوال اول را وارد کنید")], render_kw={"placeholder": "q1.jpg"})
-    q2 = StringField('اسم تصویر سوال دوم', validators=[InputRequired(message="لطفا سوال دوم را وارد کنید")], render_kw={"placeholder": "q1.jpg"})
-    q3 = StringField('اسم تصویر سوال سوم', validators=[InputRequired(message="لطفا سوال سوم را وارد کنید")], render_kw={"placeholder": "q1.jpg"})
-    q4 = StringField('اسم تصویر سوال چهارم', validators=[InputRequired(message="لطفا سوال چهارم را وارد کنید")], render_kw={"placeholder": "q1.jpg"})
-    q5 = StringField('اسم تصویر سوال پنجم', validators=[InputRequired(message="لطفا سوال پنجم را وارد کنید")], render_kw={"placeholder": "q1.jpg"})
-    o1 = StringField('گزینه های سوال اول)', validators=[InputRequired(message="لطفا گزینه ها را وارد کنید")], render_kw={"placeholder": "گزینه ها(هر گزینه را با خط تیره جدا کنید)"})
-    o2 = StringField('گزینه های سوال دوم)', validators=[InputRequired(message="لطفا گزینه ها را وارد کنید")], render_kw={"placeholder": "گزینه ها(هر گزینه را با خط تیره جدا کنید)"})
-    o3 = StringField('گزینه های سوال سوم)', validators=[InputRequired(message="لطفا گزینه ها را وارد کنید")], render_kw={"placeholder": "گزینه ها(هر گزینه را با خط تیره جدا کنید)"})
-    o4 = StringField('گزینه های سوال چهارم)', validators=[InputRequired(message="لطفا گزینه ها را وارد کنید")], render_kw={"placeholder": "گزینه ها(هر گزینه را با خط تیره جدا کنید)"})
-    o5 = StringField('گزینه های سوال پنجم)', validators=[InputRequired(message="لطفا گزینه ها را وارد کنید")], render_kw={"placeholder": "گزینه ها(هر گزینه را با خط تیره جدا کنید)"})
-    c1 = StringField('شماره صحیح سوال اول)', validators=[InputRequired(message="لطفا گزینه صحیح را وارد کنید")], render_kw={"placeholder": "مثلا 1"})
-    c2 = StringField('شماره صحیح سوال دوم)', validators=[InputRequired(message="لطفا گزینه صحیح را وارد کنید")], render_kw={"placeholder": "مثلا 1"})
-    c3 = StringField('شماره صحیح سوال سوم)', validators=[InputRequired(message="لطفا گزینه صحیح را وارد کنید")], render_kw={"placeholder": "مثلا 1"})
-    c4 = StringField('شماره صحیح سوال چهارم)', validators=[InputRequired(message="لطفا گزینه صحیح را وارد کنید")], render_kw={"placeholder": "مثلا 1"})
-    c5 = StringField('شماره صحیح سوال پنجم)', validators=[InputRequired(message="لطفا گزینه صحیح را وارد کنید")], render_kw={"placeholder": "مثلا 1"})
-    submit = SubmitField('ثبت محتوا')
+class StudentsSetupForm(FlaskForm):
+    class_name = StringField('نام کلاس', validators=[InputRequired(message="لطفا نام کلاس را وارد کنید")], render_kw={"placeholder": "نام کلاس"})
+    nums = IntegerField('تعداد انش آموزان', validators=[InputRequired(message="لطفا تعداد انش آموزان را وارد کنید")], render_kw={"placeholder": "تعداد دانش آموزان"})
+    def_pass = StringField('رمز پیش فرض', validators=[InputRequired(message="لطفا رمز پیش فرض را وارد کنید")], render_kw={"placeholder": "رمز پیش فرض برای همه"})
+    submit = SubmitField('ساخت فرم ثبت نام')
 
-class AddCouponForm(FlaskForm):
-    code = StringField('کد جایزه', validators=[InputRequired(message="لطفا کد جایزه را وارد کنید")], render_kw={"placeholder": "کد جایزه"})
-    description = StringField('توضیحات جایزه', render_kw={"placeholder": "توضیحات"})
-    expire_date = DateField('تاریخ انقضا')
-    submit = SubmitField('ثبت جایزه')
 
-class UpdateUserForm(FlaskForm):
-    user_name = StringField('نام کاربری', validators=[InputRequired(message="نام کاربری نمی تواند خالی باشد")], render_kw={"placeholder": "نام کاربری"})
-    first_name = StringField('نام', validators=[InputRequired(message="نام خود را وارد کنید")], render_kw={"placeholder": "نام"})
-    last_name = StringField('نام خانوادگی', validators=[InputRequired(message="نام خانوادگی خود را وارد کنید")], render_kw={"placeholder": "نام خانوادگی"})
-    password = PasswordField('رمز عبور', validators=[InputRequired(message="یک رمز عبور انتخاب کنید"), Length(min=8, max=20, message="رمز باید حداقل 8 کاراکتر داشته اشد")], render_kw={"placeholder": "رمز عبور"})
-    repeat_password = PasswordField('تکرار رمز عبور', validators=[InputRequired(message="رمز عبور خود را تکرار کنید"), EqualTo('password', message="تکرار رمز و رمز با یکدیگر یکسان نیستند!")], render_kw={"placeholder": "تکرار رمز عبور"})
+class CreateIslandForm(FlaskForm):
+    name = StringField('نام', validators=[InputRequired(message="نام جزیره را وارد کنید")], render_kw={"placeholder": "نام جزیره"})
+    grade = IntegerField('پایه تحصیلی', validators=[InputRequired(message="پایه تحصیلی را وارد کنید")], render_kw={"placeholder": "پایه تحصیلی هدف"})
+    lesson = SelectField('ماه', choices=[(lessons.index(l) + 1, l) for l in lessons])
+    start_date = DateField('تاریخ شروع', validators=[InputRequired(message="تاریخ شروع را وارد کنید")], render_kw={"placeholder": "تاریخ شروع"})
+    end_date = DateField('تاریخ پایان', validators=[InputRequired(message="تاریخ پایان را وارد کنید")], render_kw={"placeholder": "تاریخ پایان"})
+    avatar = StringField('تصویر جزیره', validators=[InputRequired(message="تصویر جزیره را وارد کنید")], render_kw={"placeholder": "آدرس تصویر جزیره"})
+    map = StringField('تصویر نقشه جزیره', validators=[InputRequired(message="نقشه جزیره را وارد کنید")], render_kw={"placeholder": "نام تصویر نقشه جزیره"})
+    p1 = StringField('چالش اول', validators=[InputRequired(message="چالش اول را وارد کنید")], render_kw={"placeholder": "چالش اول(بصورت آدرس تصویر مثلا img/...)"})
+    a1 = StringField('پاسخ چالش اول', validators=[InputRequired(message="پاسخ چالش اول را وارد کنید")], render_kw={"placeholder": "پاسخ صحیح چالش اول"})
+    p2 = StringField('چالش دوم', validators=[InputRequired(message="چالش دوم را وارد کنید")], render_kw={"placeholder": "چالش دوم(بصورت آدرس تصویر مثلا img/...)"})
+    a2 = StringField('پاسخ چالش دوم', validators=[InputRequired(message="پاسخ چالش دوم را وارد کنید")], render_kw={"placeholder": "پاسخ صحیح چالش دوم"})
+    p3 = StringField('چالش سوم', validators=[InputRequired(message="چالش سوم را وارد کنید")], render_kw={"placeholder": "چالش سوم(بصورت آدرس تصویر مثلا img/...)"})
+    a3 = StringField('پاسخ چالش سوم', validators=[InputRequired(message="پاسخ چالش سوم را وارد کنید")], render_kw={"placeholder": "پاسخ صحیح چالش سوم"})
+    p4 = StringField('چالش چهارم', validators=[InputRequired(message="چالش چهارم را وارد کنید")], render_kw={"placeholder": "چالش چهارم(بصورت آدرس تصویر مثلا img/...)"})
+    a4 = StringField('پاسخ چالش چهارم', validators=[InputRequired(message="پاسخ چالش چهارم را وارد کنید")], render_kw={"placeholder": "پاسخ صحیح چالش چهارم"})
+    p5 = StringField('چالش پنجم', validators=[InputRequired(message="چالش پنجم را وارد کنید")], render_kw={"placeholder": "چالش پنجم(بصورت آدرس تصویر مثلا img/...)"})
+    a5 = StringField('پاسخ چالش پنجم', validators=[InputRequired(message="پاسخ چالش پنجم را وارد کنید")], render_kw={"placeholder": "پاسخ صحیح چالش پنجم"})
+    p6 = StringField('چالش ششم', validators=[InputRequired(message="چالش ششم را وارد کنید")], render_kw={"placeholder": "چالش ششم(بصورت آدرس تصویر مثلا img/...)"})
+    a6 = StringField('پاسخ چالش ششم', validators=[InputRequired(message="پاسخ چالش ششم را وارد کنید")], render_kw={"placeholder": "پاسخ صحیح چالش ششم"})
+    # t1 = StringField('درسنامه اول', validators=[InputRequired(message="درسنامه اول را وارد کنید")], render_kw={"placeholder": "اسم عکس درسنامه اول"})
+    # t2 = StringField('درسنامه دوم', validators=[InputRequired(message="درسنامه دوم را وارد کنید")], render_kw={"placeholder": "اسم عکس درسنامه دوم"})
+    # t3 = StringField('درسنامه سوم', validators=[InputRequired(message="درسنامه سوم را وارد کنید")], render_kw={"placeholder": "اسم عکس درسنامه سوم"})
+    treasure = IntegerField('جایزه نهایی', validators=[InputRequired(message="جایزه نهایی را وارد کنید")], render_kw={"placeholder": "جایزه نهایی(تعداد سکه)"})
+    scientist = StringField('اسم عکس دانشمند', validators=[InputRequired(message="اسم عکس دانشمند را وارد کنید")], render_kw={"placeholder": "اسم عکس دانشمند جزیره(مثلا ax1)"})
+    b1 = TextAreaField('بیوگرافی 1', validators=[InputRequired(message="بیوگرافی را وارد کنید")], render_kw={"placeholder": "بیوگرافی دانشمند برای مرحله 1"})
+    b2 = TextAreaField('بیوگرافی 2', validators=[InputRequired(message="بیوگرافی را وارد کنید")], render_kw={"placeholder": "بیوگرافی دانشمند برای مرحله 2"})
+    b3 = TextAreaField('بیوگرافی 3', validators=[InputRequired(message="بیوگرافی را وارد کنید")], render_kw={"placeholder": "بیوگرافی دانشمند برای مرحله 3"})
+    b4 = TextAreaField('بیوگرافی 4', validators=[InputRequired(message="بیوگرافی را وارد کنید")], render_kw={"placeholder": "بیوگرافی دانشمند برای مرحله 4"})
+    b5 = TextAreaField('بیوگرافی 5', validators=[InputRequired(message="بیوگرافی را وارد کنید")], render_kw={"placeholder": "بیوگرافی دانشمند برای مرحله 5"})
+    b6 = TextAreaField('بیوگرافی 6', validators=[InputRequired(message="بیوگرافی را وارد کنید")], render_kw={"placeholder": "بیوگرافی دانشمند برای مرحله 6"})
+    
+    submit = SubmitField('ساخت جزیره')
+
+
+class ProfileForm(FlaskForm):
+    profile_picture = FileField('تصویر کاریری', validators=[FileAllowed(['jpg', 'png'], message="فرمت فایل غیر مجاز است.")], render_kw={"placeholder": "آواتار"})
+    user_name = StringField('نام کاربری', render_kw={"placeholder": "نام کاربری برای ورود به سایت"})
+    first_name = StringField('نام', render_kw={"placeholder": "نام"})
+    last_name = StringField('نام خانوادگی', render_kw={"placeholder": "نام خانوادگی"})
+    password = PasswordField('رمز عبور', render_kw={"placeholder": "رمز عبور جدید"})
+    repeat_password = PasswordField('تکرار رمز عبور', validators=[EqualTo('password', message="تکرار رمز و رمز با یکدیگر یکسان نیستند!")], render_kw={"placeholder": "تکرار رمز عبور"})
     submit = SubmitField('ذخیره تغییرات')
 
-class AskForm(FlaskForm):
-    full_name = StringField('نام و نام خانوادگی', validators=[InputRequired(message="نام نمی تواند خالی باشد")])
-    shad = StringField('نام کاربری شاد', validators=[InputRequired(message="نام کاربری شاد نمی تواند خالی باشد")])
-    grade = IntegerField('پایه تحصیلی', validators=[InputRequired(message="پایه تحصیلی را وارد کنید")])
-    subject = StringField('عنوان', validators=[InputRequired(message="عنوان نمی تواند خالی باشد")])
-    text = TextAreaField('پیام', validators=[InputRequired(message="پیام نمی تواند خالی باشد")])
-    submit = SubmitField('ارسال پیام')
+
+class CreateTextBookForm(FlaskForm):
+    name = StringField('نام عکس', validators=[InputRequired(message="نام عکس را وارد کنید")], render_kw={"placeholder": "مثلا test.jpg (حروف کوچک)"})
+    isl_name = StringField('نام جزیره مربوطه', validators=[InputRequired(message="نام جزیره را وارد کنید")], render_kw={"placeholder": "مثلا خوارزمی"})
+    lesson = SelectField('درس', choices=[(lessons.index(l) + 1, l) for l in lessons])
+    model = SelectField('نوع درسنامه', choices=[(textbook_models.index(l) + 1, l) for l in textbook_models])
+    submit = SubmitField('ساخت درسنامه')
+    
+        

@@ -1,0 +1,152 @@
+﻿{% extends 'base.html' %}
+
+{% block title %}
+<title>شروع بازی</title>
+{% endblock %}
+
+{% block content %}
+<!-- Start Team Details -->
+<section class="team-details-area ptb-100">
+    <div class="container">
+        <div class="team-details-desc">
+            <span class="sub-title">تیم ما</span>
+            <div class="d-flex align-items-center">
+                <h3 class="ml-3">{{ group.name }}</h3>
+                <button class="btn btn-sm btn-primary mb-2" data-toggle="modal" data-target="#changeTeamName">تغییر نام تیم</button>
+            </div> 
+            
+            <p>اینجا می توانید اطلاعات کلی راجع به تیم خود را مشاهده کنید و برای فتح جزیره ها آماده شوید.</p>
+            <div class="streams-list">
+                <h3 class="text-center">آماده فتح گنج هستی</h3>
+
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-6">
+                        <div class="single-live-stream-item mt-5">
+                            <img src="{{ url_for('static', filename='img/moghadamati.jpg') }}" alt="image">
+
+                            <div class="content">
+                                <h3 class="text-center">مرحله مقدماتی</h3>
+                            </div>
+                            <a href="{{ url_for('islands') }}"></a>
+                            <a href="{{ url_for('islands') }}" class="link-btn"></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-6">
+                        <div class="single-live-stream-item mt-5">
+                            <img src="{{ url_for('static', filename='img/ostani.jpg') }}" alt="image">
+
+                            <div class="content">
+                                <h3 class="text-center">مرحله استانی</h3>
+                            </div>
+                            <a href="{{ url_for('islands_state') }}"></a>
+                            <a href="{{ url_for('islands_state') }}" class="link-btn"></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-6">
+                        <div class="single-live-stream-item mt-5">
+                            <img src="{{ url_for('static', filename='img/keshvari.jpg') }}" alt="image">
+
+                            <div class="content">
+                                <h3 class="text-center">مرحله کشوری</h3>
+                            </div>
+                            <a href="{{ url_for('islands_country') }}"></a>
+                            <a href="{{ url_for('islands_country') }}" class="link-btn"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <ul class="team-meta">
+                <li>
+                    <div class="icon">
+                        <i class="flaticon-coin"></i>
+                    </div>
+                    <span>{{group.money}}</span>
+                    بودجه باقی مانده
+                </li>
+                <li>
+                    <div class="icon">
+                        <i class="flaticon-location"></i>
+                    </div>
+                    <span>{{ island_name }}</span>
+                    جزیره فعلی
+                </li>
+                <li>
+                    <div class="icon">
+                        <i class="flaticon-medal"></i>
+                    </div>
+                    <span>{{ passed_islands }}</span>
+                    جزیره های فتح شده
+                </li>
+                <li>
+                    <div class="icon">
+                        <i class="flaticon-appointment"></i>
+                    </div>
+                    <span>{{ group.helping_flag}}</span>
+                    تعداد کمک ها
+                </li>
+                <li>
+                    <div class="icon">
+                        <i class="flaticon-network"></i>
+                    </div>
+                    <span>{{ group.help_flag}}</span>
+                    تعداد درخواست کمک
+                </li>
+            </ul>
+
+            <div class="player-list">
+                <h3>اعضای تیم</h3>
+                <div class="row">
+                    {% for member in members %}
+                    <div class="col-lg-2 col-md-4 col-sm-6">
+                        <h5>{{ member }}</h5>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Team Details -->
+
+<!-- Change Team Name Modal -->
+<div class="modal fade" id="changeTeamName" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h4 class="modal-title text-dark">تغییر نام تیم</h4>
+            </div>
+            <div class="modal-body">
+                <input type="text" class="form-control text-white" id="new-name" placeholder="نام جدید تیم">
+                <p class="text-danger d-none" id="empty-name-err">نام نمی تواند خالی باشد</p>
+                <div class="container mt-3">
+                    <h5 class="text-dark"> انتخاب تصویر گروه</h5>
+                    <div class="row">
+                        {% for avatar in avatars_name %}
+                        <div class="col-md-3">
+                            {% if avatar == group.avatar %}
+                            <input class="form-check-input avatar-radio" type="radio" name="flexRadioDefault" id="{{avatar}}" checked>
+                            {% else %}
+                            <input class="form-check-input avatar-radio" type="radio" name="flexRadioDefault" id="{{avatar}}">
+                            {% endif %}
+                            <img src="{{ url_for('static', filename='img/avatars/' + avatar + '.jpg') }}" class="img-fluid" width="64px" height="64px">
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div> 
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="team-name">ذخیره</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Change Team Name Modal -->
+{% endblock %}
+
+{% block body_js %}
+<script src="{{ url_for('static', filename='js/team-name.js') }}"></script>
+{% endblock %}
